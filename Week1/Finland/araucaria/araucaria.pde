@@ -6,8 +6,12 @@ String imgName;
 float startSize;
 float minSize;
 
-int[] colors;
 int[] sortedColors;
+
+//imgName = "araucaria_araucana_3.jpg";
+//imgName = "araucaria_araucana_4.jpg";
+//imgName = "araucaria_araucana-detail_2.jpg";
+imgName = "araucaria.jpg";
 
 void setup(){
   size(800, 600);
@@ -17,43 +21,37 @@ void setup(){
   
   startSize = width/1.5;
   minSize = 5;
-  //startSize = width/3;
-  //minSize = 20;
   
-  //imgName = "araucaria-angustifolia71398.jpg";
-  //imgName = "Araucaria_araucana.jpg";
-  //imgName = "araucaria_araucana_3.jpg";
-  //imgName = "Araucaria_araucana-detail.jpg";
-  //imgName = "araucaria_araucana_2.jpg";
-  imgName = "araucaria_araucana_4.jpg";
-  //imgName = "araucaria_araucana-detail_2.jpg";
   img = loadImage(imgName);
   
   img.loadPixels();
-  
-  //colors = new int[img.pixels.length];
-  //for(int i = 0; i < img.pixels.length; i++){
-  //  colors[i] = img.pixels[i];
-  //}
   
   sortedColors = new int[img.pixels.length];
   sortedColors = bubbleSort(img.pixels);
 }
 
 void draw(){
-  //beginRecord(PDF, "saved/" +year() + "-" + month() + "-" + day() + "-" + hour() + "-" + minute() + "-" + second() + "-kuusi.pdf");
+  beginRecord(PDF, "saved/" +year() + "-" + month() + "-" + day() + "-" + hour() + "-" + minute() + "-" + second() + "-kuusi.pdf");
   noStroke();
-  
-  //color c = img.get((int)random(width), (int)random(height));
-  color c = sortedColors[constrain((int)map(startSize, startSize, minSize, 0, sortedColors.length-1), 0, sortedColors.length-1)];
+
+  color c = sortedColors[
+    constrain(
+      (int)map(
+        startSize, startSize, minSize, 0, sortedColors.length-1
+      ),
+      0,
+      sortedColors.length-1
+    )
+  ];
   fill(c);
   background(c);
   noStroke();
   araucaria(width/1.5, new PVector(0, 0));
   
-  //endRecord();
-  //exit();
+  endRecord();
+  exit();
   
+  // to view the sorted colors uncomment the following lines:
   //strokeWeight(2);
   //for(int i = 0; i < sortedColors.length; i++){
   //  stroke(sortedColors[i]);
@@ -66,13 +64,22 @@ void draw(){
 void araucaria(float diameter, PVector center){
   int numItems = 5;
   float angleStep = 360/numItems;
-  float extraAngle = (int)map(diameter, startSize, minSize, 0, 360);
+  float extraAngle = (int)map(diameter, startSize, minSize, 0, 360); // rotate a bit at every iteration for variety
   
-  color c = sortedColors[constrain((int)map(diameter, startSize, minSize, 0, sortedColors.length-1), 0, sortedColors.length-1)];
+  // color follows polygon diameter
+  color c = sortedColors[
+    constrain(
+      (int)map(
+        diameter + random(-minSize*10, minSize*10), startSize, minSize, 0, sortedColors.length-1
+      ),
+      0,
+      sortedColors.length-1
+    )
+  ];
   fill(c);
   
   // draw polygon
-  int polyNum = 5;
+  int polyNum = 6;
   float polyAngle = 360/polyNum; 
   beginShape();
   for(int i = 0; i < polyNum; i++){
@@ -82,6 +89,7 @@ void araucaria(float diameter, PVector center){
   }
   endShape(CLOSE);
   
+  // call the function recursively until diameter is too small
   if(diameter > minSize){
     float newDiameter = diameter/2.4;
     
@@ -93,7 +101,7 @@ void araucaria(float diameter, PVector center){
   }
 }
 
-
+// sort colors by hue, inspired by:
 // https://www.cs.cmu.edu/~adamchik/15-121/lectures/Sorting%20Algorithms/sorting.html
 int[] bubbleSort(int ar[]) {
   for (int i = (ar.length - 1); i >= 0; i--){
