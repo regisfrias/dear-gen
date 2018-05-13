@@ -8,11 +8,6 @@ float minSize;
 
 int[] sortedColors;
 
-//imgName = "araucaria_araucana_3.jpg";
-//imgName = "araucaria_araucana_4.jpg";
-//imgName = "araucaria_araucana-detail_2.jpg";
-imgName = "araucaria.jpg";
-
 void setup(){
   size(800, 600);
   noLoop();
@@ -22,8 +17,12 @@ void setup(){
   startSize = width/1.5;
   minSize = 5;
   
-  img = loadImage(imgName);
+  //imgName = "araucaria_araucana_3.jpg";
+  //imgName = "araucaria_araucana_4.jpg";
+  imgName = "araucaria_araucana-detail_2.jpg";
+  //imgName = "araucaria.jpg";
   
+  img = loadImage(imgName);
   img.loadPixels();
   
   sortedColors = new int[img.pixels.length];
@@ -31,7 +30,7 @@ void setup(){
 }
 
 void draw(){
-  beginRecord(PDF, "saved/" +year() + "-" + month() + "-" + day() + "-" + hour() + "-" + minute() + "-" + second() + "-kuusi.pdf");
+  //beginRecord(PDF, "saved/" +year() + "-" + month() + "-" + day() + "-" + hour() + "-" + minute() + "-" + second() + "-kuusi.pdf");
   noStroke();
 
   color c = sortedColors[
@@ -48,7 +47,9 @@ void draw(){
   noStroke();
   araucaria(width/1.5, new PVector(0, 0));
   
-  endRecord();
+  saveFrame("saved-png/" +year() + "-" + month() + "-" + day() + "-" + hour() + "-" + minute() + "-" + second() + "-kuusi.png");
+  
+  //endRecord();
   exit();
   
   // to view the sorted colors uncomment the following lines:
