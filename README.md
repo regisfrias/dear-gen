@@ -5,4 +5,4 @@ This project was inspired by [Dear Data](http://www.dear-data.com/) and conceive
 
 ## Contents
 
-- [Week 1: Araucária](Week1/Finland)
+- [Week 1: Araucária](Week-01)
