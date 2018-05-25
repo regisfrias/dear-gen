@@ -12,6 +12,8 @@ This week's theme was proposed by [Half](https://github.com/haschdl) and I didn'
 
 ![](docs/2018-5-14-20-14-39.png)
 
+These images were generated from an image which I can't share. So when you run the code you will see a different result. I encourage you to try with your own pictures and see what you get. Keep them small (about 300 px wide) if you don't want to wait for a century to render.
+
 ## Explainer
 
 I started searching for images of araucária trees, which I find beautiful. Then I tried to capture their logic with some algorithm. The first draft is that attempt and can be seen in previous versions of the code (up to [6dfebaf357587c6513298256939ef758f90f8105](https://github.com/regisfrias/dear-gen/commit/6dfebaf357587c6513298256939ef758f90f8105)).

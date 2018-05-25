@@ -4,11 +4,7 @@ String imgName;
 int imgScale = 3;
 
 void settings(){
-  //imgName = "araucaria-angustifolia71398.jpg";
-  //imgName = "araucaria_araucana.jpg";
-  //imgName = "araucaria_araucana-detail.jpg";
-  //imgName = "araucaria_araucana_5.jpg";
-  imgName = "holiday.jpg";
+  imgName = "img-placeholder.jpg";
   
   img = loadImage(imgName);
   img.loadPixels();
@@ -41,7 +37,7 @@ void draw(){
     //rect(x, y, imgScale, imgScale);
   }
   
-  saveFrame("saved-png/" +year() + "-" + month() + "-" + day() + "-" + hour() + "-" + minute() + "-" + second() + "-saturation.png");
+  saveFrame("saved-png/" +year() + "-" + month() + "-" + day() + "-" + hour() + "-" + minute() + "-" + second() + "-hue.png");
   exit();
 }
 
