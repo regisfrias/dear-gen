@@ -1,11 +1,9 @@
 int[] sortedColors;
 PImage img;
-String imgName;
 int imgScale = 3;
 
 void settings(){
-  imgName = "img-placeholder.jpg";
-  
+  String imgName = "img-placeholder.jpg";
   img = loadImage(imgName);
   img.loadPixels();
   size(img.width * imgScale, img.height * imgScale);
@@ -21,10 +19,6 @@ void setup(){
 
 void draw(){
   colorMode(HSB, 360, 100, 100);
-  rectMode(CENTER);
-  ellipseMode(CENTER);
-  
-  noStroke();
   
   for(int i = 0; i < sortedColors.length; i++){
     float brightness = brightness(sortedColors[i]);

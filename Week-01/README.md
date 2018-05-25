@@ -20,7 +20,7 @@ I started searching for images of araucária trees, which I find beautiful. Then
 
 I got to a fractal structure that resembles some leaf patterns (not necessarily araucárias only). Then I decided to use the colours from an actual araucária tree picture. Initially I chose the colour based on the ellipse's position on screen, but I thought that was boring. Then I thought of ordering the colours by hue or brightness and only then use them. The idea was to give some directionality and sense of logic to it.
 
-What I realised during this process was that the reordered pixels looked very interesting in itself. So I used that instead of the image and trashed the fractal altogether.
+What I realised during this process was that the reordered pixels array looked very interesting in itself. So I used that instead of the image and trashed the fractal altogether.
 
 It looks like this:
 
