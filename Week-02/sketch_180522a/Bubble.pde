@@ -27,19 +27,19 @@ class Bubble {
   }
   
   void display() {
-    fill(255);
-    ellipse(x, y, 20, 20);
+    //fill(255);
+    //ellipse(x, y, 20, 20);
     
-    //stroke(c);
-    //strokeWeight(1);
-    //noFill();
+    stroke(c);
+    strokeWeight(1);
+    noFill();
     
-    //beginShape();
-    //if(diameter > 0){
-    //  for(int i = 0; i < int(diameter); i++){
-    //    curveVertex(positions[i].x, positions[i].y);
-    //  }
-    //}
-    //endShape();
+    beginShape();
+    if(diameter > 0){
+      for(int i = 0; i < int(diameter); i++){
+        curveVertex(positions[i].x, positions[i].y);
+      }
+    }
+    endShape();
   }
 }

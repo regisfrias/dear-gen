@@ -8,7 +8,7 @@
 import processing.pdf.*;
 
 Table table;
-int scale = 2;
+int scale = 20;
 float proportion = 1.244;
 
 Bubble[] bubbles;
