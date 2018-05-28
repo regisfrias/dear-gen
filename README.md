@@ -6,4 +6,5 @@ This project was inspired by [Dear Data](http://www.dear-data.com/) and conceive
 ## Contents
 
 - [Week 1: Araucária](Week-01)
-- [Week 1: The Universe](Week-02)
+- [Week 2: The Universe](Week-02)
+- [Week 3: The Universe](Week-03)
