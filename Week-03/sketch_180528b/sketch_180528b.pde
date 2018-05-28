@@ -1,4 +1,5 @@
 int detail = 20;
+int detailY = 4;
 float size;
 float period = 360;
 float variation;
@@ -17,9 +18,9 @@ void draw(){
 }
 
 void drawLine(){
-  for(int y = - int(variation); y <= height + variation; y += detail){
-    int prevY = y - detail;
-    float phase = map(y-detail, 0, height, 0, period);
+  for(int y = - int(variation); y <= height + variation; y += detailY){
+    int prevY = y - detailY;
+    float phase = map(y-detailY, 0, height, 0, period);
     float phase2 = map(y, 0, height, 0, period);
     
     for(int x = - int(period); x <= period*2; x += detail){
@@ -49,11 +50,12 @@ void drawLine(){
         float bendY4 = cos(radians(prevX + phase2)) * variation;
         float y4 = y + bendY4;
         
-        float h = (sin(radians(y*4 + x))/2 + .5)*20 + 40;
-        float b = (sin(radians(y*4 + x))/2 + .5)*30 + 50;
+        float hueShift = map(y, - variation, height + variation, 10, 60);
+        float h = (sin(radians(y*15 - x*4))/2 + .5)*20 + hueShift;
+        float b = (sin(radians(y*15 - x*4))/2 + .5)*40 + 50;
         
         strokeWeight(1);
-        stroke(h, 80, 60);
+        stroke(h, 80, b-20);
         fill(h, 80, b);
         
         beginShape();
