@@ -16,7 +16,7 @@ void setup() {
 }
 
 void draw() {
-  background(150);
+  background(360);
   translate(0, height);
   rotateX(PI);
 
@@ -38,10 +38,15 @@ void draw() {
 
 void drawWaves(boolean horizontal, float posY, float phase) {
   float period = 360;
+  int size = horizontal ? width : height;
   beginShape();
   for (int i = 0; i <= period; i += strawSeparation) {
-    float x = horizontal ? map(i, 0, period, 0, width) : posY;
-    float y = horizontal ? posY : map(i, 0, period, 0, height);
+    float bendPhase = i/3;
+    float bendRadius = map(i, 0, period, -size/6, size/6);
+    float bend = cos(radians(i - bendPhase)) * bendRadius;
+    
+    float x = horizontal ? map(i, 0, period, 0, size) : posY + bend;
+    float y = horizontal ? posY + bend : map(i, 0, period, 0, size);
     float z = sin(radians(i * frequency + phase)) * 3;
     vertex(x, y, z);
   }
