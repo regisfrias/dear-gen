@@ -1,5 +1,6 @@
 import processing.pdf.*;
 
+boolean save = false; // change this to 'true' to save PDF
 int detail = 10;
 int detailY = 5;
 float size;
@@ -13,16 +14,30 @@ void setup(){
   variationY = height/15;
   variationX = variationY*2;
   
-  String fileName = "saved/" + year() + "-" + month() + "-" + day() + "-" + hour() + "-" + minute() + "-" + second() + "-palha.pdf";
-  beginRecord(PDF, fileName);
+  if(save){
+    String fileName = "saved/" + year() + "-" + month() + "-" + day() + "-" + hour() + "-" + minute() + "-" + second() + "-palha.pdf";
+    beginRecord(PDF, fileName);
+  }
   colorMode(HSB, 360, 100, 100);
 }
 
 void draw(){
   background(30, 70, 30);
+  
+  for(int y = 0; y < height; y++){
+    stroke(
+      map(y, 0, height, 0, 360),
+      70,
+      40
+    );
+    line(0, y, width, y);
+  }
+  
   drawLine();
-  endRecord();
-  exit();
+  if(save){
+    endRecord();
+    exit();
+  }
 }
 
 void drawLine(){
@@ -66,7 +81,7 @@ void drawLine(){
         float b = (sin(radians(y*20 - x*10))/2 + .5)*20 + 70;
         
         strokeWeight(1);
-        stroke(h, 80, b-20);
+        stroke(h, 80, b-30);
         fill(h, 80, b);
         
         beginShape();
