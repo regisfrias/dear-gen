@@ -19,7 +19,7 @@ void setup(){
 }
 
 void draw(){
-  background(360);
+  background(30, 70, 30);
   drawLine();
   endRecord();
   exit();
@@ -56,7 +56,7 @@ void drawLine(){
         float y2 = prevY + bendY2;
         
         float bendY3 = cos(radians(x + phase2)) * variationY;
-        float y3 = y + bendY3;
+        float y3 = y + bendY3 - detailY/1.5;
         
         float bendY4 = cos(radians(prevX + phase2)) * variationY;
         float y4 = y + bendY4;
