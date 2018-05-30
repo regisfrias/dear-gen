@@ -1,3 +1,7 @@
+import processing.pdf.*;
+
+boolean savePDF = false;
+String fileName;
 int rectWidth = 6;
 int rectHeight = 60;
 float period = 360;
@@ -9,7 +13,7 @@ float freqX = 1;
 float freqY = 1;
 
 void setup(){
-  size(800, 600);
+  size(900, 600);
   //variationX = width/20;
   //variationY = height/20;
   variationX = 40;
@@ -20,6 +24,12 @@ void setup(){
 
 void draw(){
   background(0);
+
+  if(savePDF){
+    fileName = "saved/" + year() + "-" + month() + "-" + day() + "-" + hour() + "-" + minute() + "-" + second() + "-palha.pdf";
+    beginRecord(PDF, fileName);
+    colorMode(HSB, 360, 100, 100);
+  }
   
   for(int y = 0; y < height; y++){
     float h = map(y, 0, height, 180, 360);
@@ -29,6 +39,11 @@ void draw(){
   
   noStroke();
   drawRects();
+  
+  if(savePDF){
+    endRecord();
+    savePDF = false;
+  }
 }
 
 void drawRects(){
@@ -80,8 +95,12 @@ void drawRects(){
 
 void keyPressed(){
   if(key == ' '){
-    String fileName = "saved-png/" + year() + "-" + month() + "-" + day() + "-" + hour() + "-" + minute() + "-" + second() + "-palha.png";
+    fileName = "saved-png/" + year() + "-" + month() + "-" + day() + "-" + hour() + "-" + minute() + "-" + second() + "-palha.png";
     saveFrame(fileName);
+  }
+  
+  if(key == 's'){
+    savePDF = true;
   }
 }
 
