@@ -1,5 +1,5 @@
-int rectWidth = 20;
-int rectHeight = 20;
+int rectWidth = 8;
+int rectHeight = 60;
 float period = 360;
 float variationY;
 float variationX;
@@ -37,13 +37,14 @@ void drawRects(){
         if(y > 0){
           float prevY = y - rectHeight;
           float prevAngleY = map(prevY, 0, height, 0, period);
-          float angleY = map(y, 0, height, 0, period);    
-          float prevBendY = sin(radians(prevAngleY*freqY + phaseY)) * variationY - compensateY;
-          float bendY = sin(radians(angleY*freqY + phaseY)) * variationY - compensateY;
+          float angleY = map(y, 0, height, 0, period);
+          
+          float prevBendY = sin(radians(prevAngleY + phaseY + prevAngleX)) * variationY - compensateY;
+          float bendY = sin(radians(angleY + phaseY + angleX)) * variationY - compensateY;
           
           float x1 = prevX + prevBendX + prevBendY;
           float x2 = x + bendX + prevBendY;
-          float x3 = x + bendX + bendY;
+          float x3 = x + bendX + bendY - variationY/10;
           float x4 = prevX + prevBendX + bendY;
           
           float y1 = prevY + prevBendY + prevBendX;
