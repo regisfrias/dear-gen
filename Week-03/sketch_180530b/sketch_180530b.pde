@@ -25,16 +25,16 @@ void drawRects(){
   float compensateX = sin(radians(phaseX)) * variationX;
   float compensateY = sin(radians(phaseY)) * variationY;
   
-  for(int x = 0; x <= width; x += rectWidth){
-    if(x > 0){
+  for(int x = - int(variationX*2); x <= width + variationX*2; x += rectWidth){
+    if(x > -variationX*2){
       float prevX = x - rectWidth;
       float prevAngleX = map(prevX, 0, width, 0, period);
       float angleX = map(x, 0, width, 0, period);
       float prevBendX = sin(radians(prevAngleX*freqX + phaseX)) * variationX - compensateX;
       float bendX = sin(radians(angleX*freqX + phaseX)) * variationX - compensateX;
       
-      for(int y = 0; y <= height; y += rectHeight){
-        if(y > 0){
+      for(int y = - int(variationY*4); y <= height + variationY*4; y += rectHeight){
+        if(y > -variationY*4){
           float prevY = y - rectHeight;
           float prevAngleY = map(prevY, 0, height, 0, period);
           float angleY = map(y, 0, height, 0, period);
