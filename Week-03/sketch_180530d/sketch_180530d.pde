@@ -26,7 +26,7 @@ void draw(){
   background(0);
   
   for(int y = 0; y < height; y++){
-    stroke(map(y, 0, height, 0, 360), 70, 30);
+    stroke(map(y, 0, height, 180, 360), 70, 30);
     line(0, y, width, y);
   }
   
