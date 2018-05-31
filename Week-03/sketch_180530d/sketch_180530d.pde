@@ -1,8 +1,8 @@
-int subdivisionsX = 10;
-int subdivisionsY = 30;
+int subdivisionsX = 40;
+int subdivisionsY = 90;
 
-float periodX = 360;
-float periodY = 360;
+float periodX = 360 * 0.9;
+float periodY = 360 * 1.1;
 
 float distortionX;
 float distortionY;
@@ -16,8 +16,8 @@ void setup(){
   rectWidth = width/subdivisionsX;
   rectHeight = height/subdivisionsY;
   
-  distortionX = width/10;
-  distortionY = height/30;
+  distortionX = width/8;
+  distortionY = height/40;
 }
 
 void draw(){
@@ -26,11 +26,11 @@ void draw(){
 }
 
 void drawRects(){
-  for(float y = -rectHeight; y <= height+rectHeight; y += rectHeight){
-    if(y > -rectHeight){
+  for(float y = -rectHeight - distortionY; y <= height +rectHeight + distortionY; y += rectHeight){
+    if(y > -rectHeight - distortionY){
       float prevY = y - rectHeight;
-      for(float x = -rectWidth; x <= width+rectWidth; x += rectWidth){
-        if(x > -rectWidth){
+      for(float x = -rectWidth - distortionX; x <= width + rectWidth + distortionX; x += rectWidth){
+        if(x > -rectWidth - distortionX){
           float prevX = x - rectWidth;
           
           float prevPhaseX = map(prevX, 0, width, 0, periodX);
