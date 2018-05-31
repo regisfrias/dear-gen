@@ -26,11 +26,11 @@ void draw(){
 }
 
 void drawRects(){
-  for(float y = 0; y <= height; y += rectHeight){
-    if(y > 0){
+  for(float y = -rectHeight; y <= height+rectHeight; y += rectHeight){
+    if(y > -rectHeight){
       float prevY = y - rectHeight;
-      for(float x = 0; x <= width; x += rectWidth){
-        if(x > 0){
+      for(float x = -rectWidth; x <= width+rectWidth; x += rectWidth){
+        if(x > -rectWidth){
           float prevX = x - rectWidth;
           
           float prevPhaseX = map(prevX, 0, width, 0, periodX);
