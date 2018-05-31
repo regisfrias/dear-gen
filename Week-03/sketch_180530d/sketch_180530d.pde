@@ -1,5 +1,5 @@
 int subdivisionsX = 40;
-int subdivisionsY = 90;
+int subdivisionsY = 130;
 
 float periodX = 360 * 0.9;
 float periodY = 360 * 1.1;
@@ -18,6 +18,8 @@ void setup(){
   
   distortionX = width/8;
   distortionY = height/40;
+  
+  colorMode(HSB, 360, 100, 100);
 }
 
 void draw(){
@@ -57,6 +59,10 @@ void drawRects(){
           float y3 = y + bendX3/3;
           float y4 = y + bendX4/3;
           
+          float h = cos(radians(angleY*30 - x*4))*10 + 40;
+          
+          fill(h, 90, 80);
+          stroke(h, 70, 40);
           beginShape();
           vertex(x1, y1);
           vertex(x2, y2);
