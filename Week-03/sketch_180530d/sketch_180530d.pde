@@ -2,7 +2,7 @@ int subdivisionsX = 10;
 int subdivisionsY = 30;
 
 float periodX = 360;
-float periodY = 360*1.5;
+float periodY = 360;
 
 float distortionX;
 float distortionY;
@@ -17,7 +17,7 @@ void setup(){
   rectHeight = height/subdivisionsY;
   
   distortionX = width/10;
-  distortionY = height/2;
+  distortionY = height/30;
 }
 
 void draw(){
@@ -29,11 +29,6 @@ void drawRects(){
   for(float y = 0; y <= height; y += rectHeight){
     if(y > 0){
       float prevY = y - rectHeight;
-      float y1 = prevY;
-      float y2 = prevY;
-      float y3 = y;
-      float y4 = y;
-      
       for(float x = 0; x <= width; x += rectWidth){
         if(x > 0){
           float prevX = x - rectWidth;
@@ -41,18 +36,26 @@ void drawRects(){
           float prevPhaseX = map(prevX, 0, width, 0, periodX);
           float phaseX = map(x, 0, width, 0, periodX);
           
-          float prevAngleY = map(prevY, 0, width, 0, periodY);
-          float angleY = map(y, 0, width, 0, periodY);
+          float prevAngleY = map(prevY, 0, height, 0, periodY);
+          float angleY = map(y, 0, height, 0, periodY);
           
-          float bendY1 = sin(radians(prevAngleY + prevPhaseX)) * distortionX;
-          float bendY2 = sin(radians(prevAngleY + phaseX)) * distortionX;
-          float bendY3 = sin(radians(angleY + phaseX)) * distortionX;
-          float bendY4 = sin(radians(angleY + prevPhaseX)) * distortionX;
+          float varPrevAmplX = cos(radians(prevPhaseX));
+          float varAmplX = cos(radians(phaseX));
           
-          float x1 = prevX + bendY1;
-          float x2 = x + bendY2;
-          float x3 = x + bendY3;
-          float x4 = prevX + bendY4;
+          float bendX1 = sin(radians(prevAngleY + prevPhaseX)) * distortionX*varPrevAmplX;
+          float bendX2 = sin(radians(prevAngleY + phaseX)) * distortionX*varAmplX;
+          float bendX3 = sin(radians(angleY + phaseX)) * distortionX*varAmplX;
+          float bendX4 = sin(radians(angleY + prevPhaseX)) * distortionX*varPrevAmplX;
+          
+          float x1 = prevX + bendX1;
+          float x2 = x + bendX2;
+          float x3 = x + bendX3;
+          float x4 = prevX + bendX4;
+          
+          float y1 = prevY + bendX1/3;
+          float y2 = prevY + bendX2/3;
+          float y3 = y + bendX3/3;
+          float y4 = y + bendX4/3;
           
           beginShape();
           vertex(x1, y1);
