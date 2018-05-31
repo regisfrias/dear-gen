@@ -14,8 +14,6 @@ float freqY = 1;
 
 void setup(){
   size(900, 600);
-  //variationX = width/20;
-  //variationY = height/20;
   variationX = 40;
   variationY = 40;
   
@@ -64,8 +62,8 @@ void drawRects(){
           float prevAngleY = map(prevY, 0, height, 0, period);
           float angleY = map(y, 0, height, 0, period);
           
-          float prevBendY = sin(radians(prevAngleY + phaseY + prevAngleX)) * variationY - compensateY;
-          float bendY = sin(radians(angleY + phaseY + angleX)) * variationY - compensateY;
+          float prevBendY = sin(radians(prevAngleY*freqY + phaseY + prevAngleX)) * variationY - compensateY;
+          float bendY = sin(radians(angleY*freqY + phaseY + angleX)) * variationY - compensateY;
           
           float x1 = prevX + prevBendX + prevBendY;
           float x2 = x + bendX + prevBendY - 1;
@@ -77,7 +75,6 @@ void drawRects(){
           float y3 = y + bendY + bendX;
           float y4 = y + bendY + prevBendX;
           
-          //float h = map(x1, 0, width, 20, 50);
           float h = cos(radians(y1*20 + x1)) * 10 + 40;
           
           fill(h, 90, 80);
