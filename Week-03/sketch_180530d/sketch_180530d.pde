@@ -23,7 +23,14 @@ void setup(){
 }
 
 void draw(){
-  background(180);
+  background(0);
+  
+  for(int y = 0; y < height; y++){
+    stroke(map(y, 0, height, 0, 360), 70, 30);
+    line(0, y, width, y);
+  }
+  
+  noStroke();
   drawRects();
 }
 
@@ -56,13 +63,12 @@ void drawRects(){
           
           float y1 = prevY + bendX1/3;
           float y2 = prevY + bendX2/3;
-          float y3 = y + bendX3/3;
+          float y3 = y + bendX3/3 - distortionY/5;
           float y4 = y + bendX4/3;
           
           float h = cos(radians(angleY*30 - x*4))*10 + 40;
           
           fill(h, 90, 80);
-          stroke(h, 70, 40);
           beginShape();
           vertex(x1, y1);
           vertex(x2, y2);
