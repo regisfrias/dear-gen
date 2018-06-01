@@ -48,16 +48,16 @@ void drawRects(){
   float compensateX = sin(radians(phaseX)) * variationX;
   float compensateY = sin(radians(phaseY)) * variationY;
   
-  for(int x = - int(variationX*3); x <= width + variationX*3; x += rectWidth){
-    if(x > -variationX*3){
+  for(int x = -int(variationX + rectWidth); x <= width + variationX + rectWidth; x += rectWidth){
+    if(x > -variationX - rectWidth){
       float prevX = x - rectWidth;
       float prevAngleX = map(prevX, 0, width, 0, period);
       float angleX = map(x, 0, width, 0, period);
       float prevBendX = sin(radians(prevAngleX*freqX + phaseX)) * variationX - compensateX;
       float bendX = sin(radians(angleX*freqX + phaseX)) * variationX - compensateX;
       
-      for(int y = - int(variationY*4); y <= height + variationY*4; y += rectHeight){
-        if(y > -variationY*4){
+      for(int y = -int(variationY + rectHeight); y <= height + variationY + rectHeight; y += rectHeight){
+        if(y > -variationY - rectHeight){
           float prevY = y - rectHeight;
           float prevAngleY = map(prevY, 0, height, 0, period);
           float angleY = map(y, 0, height, 0, period);
@@ -75,7 +75,7 @@ void drawRects(){
           float y3 = y + bendY + bendX;
           float y4 = y + bendY + prevBendX;
           
-          float h = cos(radians(y1*20 + x1)) * 10 + 40;
+          float h = sin(radians(y1*20 + x1)) * 10 + 40;
           
           fill(h, 90, 80);
           beginShape();
