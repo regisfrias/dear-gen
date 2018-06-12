@@ -1,5 +1,5 @@
-float strawWidth = 5;
-float strawSeparation = strawWidth*2; 
+float strawWidth = 4;
+float strawSeparation = strawWidth*1.8; 
 float phaseShift = 120;
 float frequency;
 
@@ -22,13 +22,13 @@ void draw() {
 
   for (int i = 0; i < width; i += width/frequency) {
     stroke(
-      map(i, 0, width, 50, 60),
+      map(i, 0, width, 45, 60),
       90,
       90
     );
     drawWaves(true, i, i * phaseShift);
     stroke(
-      map(i, 0, width, 40, 50),
+      map(i, 0, width, 40, 55),
       80,
       80
     );
@@ -41,13 +41,27 @@ void drawWaves(boolean horizontal, float posY, float phase) {
   int size = horizontal ? width : height;
   beginShape();
   for (int i = 0; i <= period; i += strawSeparation) {
-    float bendPhase = i/3;
-    float bendRadius = map(i, 0, period, -size/6, size/6);
+    float bendPhase = i/4;
+    float bendRadius = map(i, 0, period*2, -size/6, size/6);
     float bend = cos(radians(i - bendPhase)) * bendRadius;
     
     float x = horizontal ? map(i, 0, period, 0, size) : posY + bend;
     float y = horizontal ? posY + bend : map(i, 0, period, 0, size);
     float z = sin(radians(i * frequency + phase)) * 3;
+    vertex(x, y, z);
+  }
+  endShape(OPEN);
+  
+  stroke(0, 100);
+  beginShape();
+  for (int i = 0; i <= period; i += strawSeparation) {
+    float bendPhase = i/4;
+    float bendRadius = map(i, 0, period*2, -size/6, size/6);
+    float bend = cos(radians(i - bendPhase)) * bendRadius;
+    
+    float x = horizontal ? map(i, 0, period, 0, size) : posY + bend + 1;
+    float y = horizontal ? posY + bend + 1 : map(i, 0, period, 0, size);
+    float z = sin(radians(i * frequency + phase)) * 3 + 3;
     vertex(x, y, z);
   }
   endShape(OPEN);
