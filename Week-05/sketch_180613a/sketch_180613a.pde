@@ -1,3 +1,5 @@
+import processing.pdf.*;
+
 int gridW = 3;
 int gridH = 3;
 PVector[][] grid;
@@ -12,22 +14,28 @@ PVector initialPoint;
 PVector supportPoint;
 
 void setup(){
-  size(800, 600);
+  size(1022, 638);
   noLoop();
+  
+  beginRecord(PDF, "alphabet.pdf");
 }
 
 void draw(){
+  strokeWeight(3);
   drawAlphabet();
+  
+  endRecord();
+  exit();
 }
 
 void drawAlphabet(){
   float lineHeight = height/8;
   float em = lineHeight * 0.75;
-  int margin = height/4;
+  int margin = height/8;
   float padding = em/3;
   
   for(int x = margin; x < width - margin; x += em + padding){
-    for(int y = margin; y < height - margin; y += em + padding){
+    for(int y = margin; y < height - margin - lineHeight; y += em + padding){
       drawLetter(lineHeight, em, x, y);
     }
   }
@@ -51,28 +59,14 @@ void drawStroke(){
   
   if(isStraightLine){
     stroke(0);
-    strokeWeight(5);
     line(initialPoint.x, initialPoint.y, supportPoint.x, supportPoint.y);
-    
-    stroke(255,0,0);
-    strokeWeight(8);
-    point(initialPoint.x, initialPoint.y);
-    point(supportPoint.x, supportPoint.y);
   } else {
     stroke(0);
-    strokeWeight(5);
-    noFill();
     drawArc(
       initialPoint,
       supportPoint,
       180
     );
-    
-    strokeWeight(8);
-    stroke(255,0,0);
-    point(initialPoint.x, initialPoint.y);
-    stroke(0,255,0);
-    point(supportPoint.x, supportPoint.y);
   }
   
   // Calculate next initial and support points
@@ -98,9 +92,6 @@ PVector[][] drawGrid(float lineHeight, float em, int gridW, int gridH, float x, 
   for(int i = 0; i < gridW; i++){
     for(int j = 0; j < gridH; j++){
       vector[i][j] = new PVector(i*cellW + x, j*cellH + y);
-      strokeWeight(2);
-      stroke(0, 100);
-      point(i*cellW + x, j*cellH + y);
     }
   }
   
