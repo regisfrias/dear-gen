@@ -57,7 +57,7 @@ void drawAlphabet(){
 }
 
 void drawLetter(float lineHeight, float em, float x, float y){
-  int numStrokes = int(random(3, 7));
+  int numStrokes = int(random(2, 6));
   
   grid = drawGrid(lineHeight, em, gridW, gridH, x, y);
   initialPoint = grid[randomX1][randomY1];
