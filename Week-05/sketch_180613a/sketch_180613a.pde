@@ -19,16 +19,19 @@ String fileName;
 void setup(){
   size(1022, 638);
   noLoop();
+  colorMode(HSB, 360, 100, 100);
 }
 
 void draw(){
   if(savePDF){
-    fileName = "saved/" + year() + "-" + month() + "-" + day() + "-" + hour() + "-" + minute() + "-" + second() + "-palha.pdf";
+    fileName = "saved/" + year() + "-" + month() + "-" + day() + "-" + hour() + "-" + minute() + "-" + second() + "-alphabet.pdf";
     beginRecord(PDF, fileName);
     colorMode(HSB, 360, 100, 100);
   }
   
-  background(255);
+  fill(100, 0, 100);
+  noStroke();
+  rect(0, 0, width, height);
   
   strokeWeight(3);
   drawAlphabet();
@@ -44,7 +47,7 @@ void drawAlphabet(){
   float lineHeight = height/8;
   float em = lineHeight * 0.75;
   int margin = height/8;
-  float padding = em/3;
+  float padding = em/2;
   
   for(int x = margin; x < width - margin; x += em + padding){
     for(int y = margin; y < height - margin - lineHeight; y += em + padding){
