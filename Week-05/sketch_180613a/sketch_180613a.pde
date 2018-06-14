@@ -1,27 +1,32 @@
+int gridW = 4;
+int gridH = 4;
+PVector[][] grid;
+
+// First random (initial and support) points
+int randomX1 = int(random(gridW));
+int randomY1 = int(random(gridH));
+int randomX2 = int(random(gridW));
+int randomY2 = int(random(gridH));
+
+PVector initialPoint;
+PVector supportPoint;
+
 void setup(){
   size(800, 600);
   noLoop();
+  
+  grid = drawGrid(height/2, gridW, gridH);
+  initialPoint = grid[randomX1][randomY1];
+  supportPoint = grid[randomX2][randomY2];
 }
 
 void draw(){
-  translate(width/4, height/4);
-  drawLetter(false);
+  drawStroke(false);
 }
 
-void drawLetter(boolean isStraightLine){
+void drawStroke(boolean isStraightLine){
   //boolean isStraightLine = second() % 2 == 0 ? true : false;
   //boolean isStraightLine = true;
-  int gridW = 4;
-  int gridH = 4;
-  PVector[][] grid = drawGrid(height/2, gridW, gridH);
-
-  int randomX1 = int(random(gridW));
-  int randomY1 = int(random(gridH));
-  int randomX2 = int(random(gridW));
-  int randomY2 = int(random(gridH));
-  
-  PVector initialPoint = grid[randomX1][randomY1];
-  PVector supportPoint = grid[randomX2][randomY2];
   
   if(isStraightLine){
     stroke(0);
