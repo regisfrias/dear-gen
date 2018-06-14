@@ -14,20 +14,26 @@ PVector supportPoint;
 void setup(){
   size(800, 600);
   noLoop();
-  
-  grid = drawGrid(height/2, gridW, gridH);
-  initialPoint = grid[randomX1][randomY1];
-  supportPoint = grid[randomX2][randomY2];
+  smooth();
 }
 
 void draw(){
-  drawStroke(true);
-  drawStroke(false);
-  drawStroke(second() % 2 == 0 ? true : false);
+  drawLetter(height/5, 40, 40);
 }
 
-void drawStroke(boolean isStraightLine){
-  //boolean isStraightLine = second() % 2 == 0 ? true : false;
+void drawLetter(float lineHeight, float x, float y){
+  
+  grid = drawGrid(lineHeight, gridW, gridH, x, y);
+  initialPoint = grid[randomX1][randomY1];
+  supportPoint = grid[randomX2][randomY2];
+  
+  drawStroke();
+  drawStroke();
+  drawStroke();
+}
+
+void drawStroke(){
+  boolean isStraightLine = random(1) > 0.5 ? true : false;
   //boolean isStraightLine = true;
   
   if(isStraightLine){
@@ -64,7 +70,7 @@ void drawStroke(boolean isStraightLine){
   supportPoint = grid[randomNextX][randomNextY];
 }
 
-PVector[][] drawGrid(float lineHeight, int gridW, int gridH){
+PVector[][] drawGrid(float lineHeight, int gridW, int gridH, float x, float y){
   PVector[][] vector = new PVector[gridW][gridH];
   float em = lineHeight * 0.75;
   float cellW = em/gridW;
@@ -72,10 +78,10 @@ PVector[][] drawGrid(float lineHeight, int gridW, int gridH){
   
   for(int i = 0; i < gridW; i++){
     for(int j = 0; j < gridH; j++){
-      vector[i][j] = new PVector(i*cellW, j*cellH);
-      strokeWeight(5);
-      fill(0);
-      point(i*cellW, j*cellH);
+      vector[i][j] = new PVector(i*cellW + x, j*cellH + y);
+      strokeWeight(2);
+      stroke(0, 100);
+      point(i*cellW + x, j*cellH + y);
     }
   }
   
