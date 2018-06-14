@@ -17,13 +17,26 @@ void setup(){
 }
 
 void draw(){
-  drawLetter(height/5, 40, 40);
+  drawAlphabet();
 }
 
-void drawLetter(float lineHeight, float x, float y){
+void drawAlphabet(){
+  float lineHeight = height/8;
+  float em = lineHeight * 0.75;
+  int margin = height/4;
+  float padding = em/3;
+  
+  for(int x = margin; x < width - margin; x += em + padding){
+    for(int y = margin; y < height - margin; y += em + padding){
+      drawLetter(lineHeight, em, x, y);
+    }
+  }
+}
+
+void drawLetter(float lineHeight, float em, float x, float y){
   int numStrokes = int(random(3, 7));
   
-  grid = drawGrid(lineHeight, gridW, gridH, x, y);
+  grid = drawGrid(lineHeight, em, gridW, gridH, x, y);
   initialPoint = grid[randomX1][randomY1];
   supportPoint = grid[randomX2][randomY2];
   
@@ -77,9 +90,8 @@ void drawStroke(){
   supportPoint = grid[randomNextX][randomNextY];
 }
 
-PVector[][] drawGrid(float lineHeight, int gridW, int gridH, float x, float y){
+PVector[][] drawGrid(float lineHeight, float em, int gridW, int gridH, float x, float y){
   PVector[][] vector = new PVector[gridW][gridH];
-  float em = lineHeight * 0.75;
   float cellW = em/gridW;
   float cellH = lineHeight/gridH;
   
