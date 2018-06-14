@@ -14,7 +14,6 @@ PVector supportPoint;
 void setup(){
   size(800, 600);
   noLoop();
-  smooth();
 }
 
 void draw(){
@@ -22,19 +21,19 @@ void draw(){
 }
 
 void drawLetter(float lineHeight, float x, float y){
+  int numStrokes = int(random(3, 7));
   
   grid = drawGrid(lineHeight, gridW, gridH, x, y);
   initialPoint = grid[randomX1][randomY1];
   supportPoint = grid[randomX2][randomY2];
   
-  drawStroke();
-  drawStroke();
-  drawStroke();
+  for(int i = 0; i < numStrokes; i++){
+    drawStroke();
+  }
 }
 
 void drawStroke(){
   boolean isStraightLine = random(1) > 0.5 ? true : false;
-  //boolean isStraightLine = true;
   
   if(isStraightLine){
     stroke(0);
