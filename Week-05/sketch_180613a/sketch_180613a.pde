@@ -34,6 +34,7 @@ void drawLetter(float lineHeight, float x, float y){
 
 void drawStroke(){
   boolean isStraightLine = random(1) > 0.5 ? true : false;
+  boolean isContinuous = random(1) > 0.5 ? true : false;
   
   if(isStraightLine){
     stroke(0);
@@ -65,7 +66,14 @@ void drawStroke(){
   int randomNextX = int(random(gridW));
   int randomNextY = int(random(gridH));
   
-  initialPoint = supportPoint;
+  if(isContinuous){
+    initialPoint = supportPoint;
+  } else {
+    int randomNextInitX = int(random(gridW));
+    int randomNextInitY = int(random(gridH));
+    initialPoint = grid[randomNextInitX][randomNextInitY];
+  }
+  
   supportPoint = grid[randomNextX][randomNextY];
 }
 
