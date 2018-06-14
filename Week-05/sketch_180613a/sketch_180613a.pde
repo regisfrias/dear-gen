@@ -1,5 +1,6 @@
 import processing.pdf.*;
 
+boolean savePDF = false;
 int gridW = 3;
 int gridH = 3;
 PVector[][] grid;
@@ -13,19 +14,30 @@ int randomY2 = int(random(gridH));
 PVector initialPoint;
 PVector supportPoint;
 
+String fileName;
+
 void setup(){
   size(1022, 638);
   noLoop();
-  
-  beginRecord(PDF, "alphabet.pdf");
 }
 
 void draw(){
+  if(savePDF){
+    fileName = "saved/" + year() + "-" + month() + "-" + day() + "-" + hour() + "-" + minute() + "-" + second() + "-palha.pdf";
+    beginRecord(PDF, fileName);
+    colorMode(HSB, 360, 100, 100);
+  }
+  
+  background(255);
+  
   strokeWeight(3);
   drawAlphabet();
   
-  endRecord();
-  exit();
+  if(savePDF){
+    endRecord();
+    savePDF = false;
+    noLoop();
+  }
 }
 
 void drawAlphabet(){
@@ -117,5 +129,12 @@ void drawArc(PVector initialPoint, PVector supportPoint, float arcAngle){
     float x2 = cos(radians(theta-angleIncr)) * radius + center.x;
     float y2 = sin(radians(theta-angleIncr)) * radius + center.y;
     line(x1, y1, x2, y2);
+  }
+}
+
+void keyPressed(){
+  if(key == 's'){
+    savePDF = true;
+    loop();
   }
 }
