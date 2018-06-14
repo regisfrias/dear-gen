@@ -1,5 +1,5 @@
-int gridW = 4;
-int gridH = 4;
+int gridW = 3;
+int gridH = 3;
 PVector[][] grid;
 
 // First random (initial and support) points
@@ -21,7 +21,9 @@ void setup(){
 }
 
 void draw(){
+  drawStroke(true);
   drawStroke(false);
+  drawStroke(second() % 2 == 0 ? true : false);
 }
 
 void drawStroke(boolean isStraightLine){
@@ -53,6 +55,13 @@ void drawStroke(boolean isStraightLine){
     stroke(0,255,0);
     point(supportPoint.x, supportPoint.y);
   }
+  
+  // Calculate next initial and support points
+  int randomNextX = int(random(gridW));
+  int randomNextY = int(random(gridH));
+  
+  initialPoint = supportPoint;
+  supportPoint = grid[randomNextX][randomNextY];
 }
 
 PVector[][] drawGrid(float lineHeight, int gridW, int gridH){
