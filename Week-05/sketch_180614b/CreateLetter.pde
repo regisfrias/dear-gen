@@ -9,17 +9,21 @@ class CreateLetter {
   int gridH;
   float x;
   float y;
+  float w;
+  float h;
   
   PVector initialPoint;
   PVector supportPoint;
   
-  CreateLetter(float _lineHeight, float _em, int _gridW, int _gridH, float _x, float _y){
+  CreateLetter(float _lineHeight, float _em, int _gridW, int _gridH, float _x, float _y, float _w, float _h){
     lineHeight = _lineHeight;
     em = _em;
     gridW = _gridW;
     gridH = _gridH;
     x = _x;
     y = _y;
+    w = _w;
+    h = _h;
     
     // Initial random points (for the first stroke)
     int randomInitX = int(random(gridW));
@@ -52,39 +56,51 @@ class CreateLetter {
   
   void draw(){
 
-    //stroke(0, 100);
-    //strokeWeight(3);
-    //for(int i = 0; i < grid.points().length; i++){
-    //  for(int j = 0; j < grid.points()[i].length; j++){
-    //    point(grid.points()[i][j].x, grid.points()[i][j].y);
-    //  }
-    //}
+    stroke(0, 100);
+    strokeWeight(3);
     
-    //strokeWeight(1);
-    //line(
-    //  grid.points()[0][0].x,
-    //  grid.points()[0][0].y,
-    //  grid.points()[0][gridH-1].x,
-    //  grid.points()[0][gridH-1].y
-    //);
-    //line(
-    //  grid.points()[0][gridH-1].x,
-    //  grid.points()[0][gridH-1].y,
-    //  grid.points()[gridH-1][gridW-1].x,
-    //  grid.points()[gridH-1][gridW-1].y
-    //);
-    //line(
-    //  grid.points()[gridH-1][gridW-1].x,
-    //  grid.points()[gridH-1][gridW-1].y,
-    //  grid.points()[gridH-1][0].x,
-    //  grid.points()[gridH-1][0].y
-    //);
-    //line(
-    //  grid.points()[gridH-1][0].x,
-    //  grid.points()[gridH-1][0].y,
-    //  grid.points()[0][0].x,
-    //  grid.points()[0][0].y
-    //);
+    if(showGrid){
+      fill(0, 1);
+      rect(
+        grid.points()[0][0].x,
+        grid.points()[0][0].y,
+      w,
+      h
+    );
+      fill(2);
+    
+      for(int i = 0; i < grid.points().length; i++){
+        for(int j = 0; j < grid.points()[i].length; j++){
+          point(grid.points()[i][j].x, grid.points()[i][j].y);
+      }
+    }
+    
+      strokeWeight(1);
+      line(
+        grid.points()[0][0].x,
+        grid.points()[0][0].y,
+        grid.points()[0][gridH-1].x,
+        grid.points()[0][gridH-1].y
+    );
+      line(
+        grid.points()[0][gridH-1].x,
+        grid.points()[0][gridH-1].y,
+        grid.points()[gridH-1][gridW-1].x,
+        grid.points()[gridH-1][gridW-1].y
+    );
+      line(
+        grid.points()[gridH-1][gridW-1].x,
+        grid.points()[gridH-1][gridW-1].y,
+        grid.points()[gridH-1][0].x,
+        grid.points()[gridH-1][0].y
+    );
+      line(
+        grid.points()[gridH-1][0].x,
+        grid.points()[gridH-1][0].y,
+        grid.points()[0][0].x,
+        grid.points()[0][0].y
+      );
+    }
     
     stroke(0);
     strokeWeight(5);

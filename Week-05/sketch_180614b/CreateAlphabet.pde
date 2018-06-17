@@ -32,7 +32,9 @@ class CreateAlphabet {
             gridW,
             gridH,
             x,
-            y
+            y,
+            rectWidth,
+            rectHeight
           );
 
         }

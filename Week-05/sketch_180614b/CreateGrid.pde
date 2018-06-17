@@ -5,6 +5,8 @@ class CreateGrid {
   int gridH;
   float x;
   float y;
+  float w;
+  float h;
   
   PVector[][] vector;
   float cellW;
@@ -21,6 +23,7 @@ class CreateGrid {
     vector = new PVector[int(gridW)][int(gridH)];
     cellW = em/gridW;
     cellH = lineHeight/gridH;
+    
   }
   
   PVector[][] points(){
