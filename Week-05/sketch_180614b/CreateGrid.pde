@@ -18,7 +18,7 @@ class CreateGrid {
     x = _x;
     y = _y;
     
-    vector = new PVector[gridW][gridH];
+    vector = new PVector[int(gridW)][int(gridH)];
     cellW = em/gridW;
     cellH = lineHeight/gridH;
   }

@@ -60,6 +60,32 @@ class CreateLetter {
     //  }
     //}
     
+    //strokeWeight(1);
+    //line(
+    //  grid.points()[0][0].x,
+    //  grid.points()[0][0].y,
+    //  grid.points()[0][gridH-1].x,
+    //  grid.points()[0][gridH-1].y
+    //);
+    //line(
+    //  grid.points()[0][gridH-1].x,
+    //  grid.points()[0][gridH-1].y,
+    //  grid.points()[gridH-1][gridW-1].x,
+    //  grid.points()[gridH-1][gridW-1].y
+    //);
+    //line(
+    //  grid.points()[gridH-1][gridW-1].x,
+    //  grid.points()[gridH-1][gridW-1].y,
+    //  grid.points()[gridH-1][0].x,
+    //  grid.points()[gridH-1][0].y
+    //);
+    //line(
+    //  grid.points()[gridH-1][0].x,
+    //  grid.points()[gridH-1][0].y,
+    //  grid.points()[0][0].x,
+    //  grid.points()[0][0].y
+    //);
+    
     stroke(0);
     strokeWeight(5);
     for(int i = 0; i < numStrokes; i++){
