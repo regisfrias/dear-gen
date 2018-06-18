@@ -15,6 +15,9 @@ class CreateLetter {
   PVector initialPoint;
   PVector supportPoint;
   
+  float cellW;
+  float cellH;
+  
   CreateLetter(float _lineHeight, float _em, int _gridW, int _gridH, float _x, float _y, float _w, float _h){
     lineHeight = _lineHeight;
     em = _em;
@@ -55,54 +58,60 @@ class CreateLetter {
   }
   
   void draw(){
-
-    stroke(0, 100);
-    strokeWeight(3);
     
     if(showGrid){
+      pushStyle();
+      stroke(0, 60);
+      strokeWeight(1);
       fill(0, 1);
+      
+      float repositionRectX = (w - (grid.points()[gridH-1][0].x - grid.points()[0][0].x))/2;
+      float repositionRectY = (h - (grid.points()[0][gridH-1].y - grid.points()[0][0].y))/2;
+      
       rect(
-        grid.points()[0][0].x,
-        grid.points()[0][0].y,
-      w,
-      h
-    );
-      fill(2);
+        grid.points()[0][0].x - repositionRectX,
+        grid.points()[0][0].y - repositionRectY,
+        w,
+        h
+      );
+      
+      strokeWeight(5);
     
       for(int i = 0; i < grid.points().length; i++){
         for(int j = 0; j < grid.points()[i].length; j++){
           point(grid.points()[i][j].x, grid.points()[i][j].y);
+        }
       }
-    }
-    
+      
       strokeWeight(1);
       line(
         grid.points()[0][0].x,
         grid.points()[0][0].y,
         grid.points()[0][gridH-1].x,
         grid.points()[0][gridH-1].y
-    );
+      );
       line(
         grid.points()[0][gridH-1].x,
         grid.points()[0][gridH-1].y,
         grid.points()[gridH-1][gridW-1].x,
         grid.points()[gridH-1][gridW-1].y
-    );
+      );
       line(
         grid.points()[gridH-1][gridW-1].x,
         grid.points()[gridH-1][gridW-1].y,
         grid.points()[gridH-1][0].x,
         grid.points()[gridH-1][0].y
-    );
+      );
       line(
         grid.points()[gridH-1][0].x,
         grid.points()[gridH-1][0].y,
         grid.points()[0][0].x,
         grid.points()[0][0].y
       );
+      
+      popStyle();
     }
     
-    stroke(0);
     strokeWeight(5);
     for(int i = 0; i < numStrokes; i++){
       stroke[i].draw();

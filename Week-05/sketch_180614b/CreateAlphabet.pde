@@ -36,9 +36,7 @@ class CreateAlphabet {
             rectWidth,
             rectHeight
           );
-
         }
-        
         total++;
       }
     }
