@@ -4,7 +4,7 @@ class CreateLetter {
   CreateStroke[] stroke = new CreateStroke[numStrokes];
   CreateGrid grid;
   
-  CreateLetter(CreateGrid _grid, float _lineHeight, float _em){
+  CreateLetter(CreateGrid _grid, float _lineHeight, float _em, float _strokeWeight){
     grid = _grid;
     
     // Initial random points (for the first stroke)
@@ -17,7 +17,7 @@ class CreateLetter {
     PVector supportPoint = grid.points()[randomSupportX][randomSupportY];
     
     for(int i = 0; i < numStrokes; i++){
-      stroke[i] = new CreateStroke(initialPoint, supportPoint);
+      stroke[i] = new CreateStroke(initialPoint, supportPoint, _strokeWeight);
       
       // Calculate next initial and support points
       int randomNextX = int(random(gridSubdivisionsW));

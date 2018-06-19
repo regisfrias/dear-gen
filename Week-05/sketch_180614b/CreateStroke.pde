@@ -2,11 +2,13 @@ class CreateStroke {
   boolean isStraightLine = random(1) > 0.5 ? true : false;
   PVector initialPoint;
   PVector supportPoint;
+  float strokeWeight;
   PShape stroke = createShape();
   
-  CreateStroke(PVector _initialPoint, PVector _supportPoint){
+  CreateStroke(PVector _initialPoint, PVector _supportPoint, float _strokeWeight){
     initialPoint = _initialPoint;
     supportPoint = _supportPoint;
+    strokeWeight = _strokeWeight;
   }
   
   PShape returnStroke(){

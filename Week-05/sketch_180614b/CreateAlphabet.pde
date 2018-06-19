@@ -16,8 +16,10 @@ class CreateLetters {
     
     this.calculateSizes();
     
+    float strokeWeight = _em/15;
+    
     for(int i = 0; i < numLetters; i++){
-      letters[i] = new CreateLetter(grid, _lineHeight, _em);
+      letters[i] = new CreateLetter(grid, _lineHeight, _em, strokeWeight);
     }
   }
   
