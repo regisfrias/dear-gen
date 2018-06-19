@@ -59,7 +59,7 @@ class CreateLetters {
       }
     }
     
-    
+    // Write some text with alphabet
     shape(letters[0].returnLetter(), padding, height-padding);
     
   }

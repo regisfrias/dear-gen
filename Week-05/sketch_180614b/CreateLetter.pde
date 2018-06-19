@@ -40,11 +40,24 @@ class CreateLetter {
     letter = createShape(GROUP);
     
     if(showGrid) {
+      PShape rect = createShape();
+      rect.beginShape();
+      rect.strokeWeight(1);
+      rect.noFill();
+      rect.stroke(0, 100);
+      rect.vertex(grid.points()[0][0].x, grid.points()[0][0].y);
+      rect.vertex(grid.points()[gridSubdivisionsW-1][0].x, grid.points()[gridSubdivisionsW-1][0].y);
+      rect.vertex(grid.points()[gridSubdivisionsW-1][gridSubdivisionsH-1].x, grid.points()[gridSubdivisionsW-1][gridSubdivisionsH-1].y);
+      rect.vertex(grid.points()[0][gridSubdivisionsH-1].x, grid.points()[0][gridSubdivisionsH-1].y);
+      rect.endShape(CLOSE);
+      letter.addChild(rect);
+      
       for(int i = 0; i < gridSubdivisionsW; i++){
         for(int j = 0; j < gridSubdivisionsH; j++){
           PShape point = createShape();
           point.beginShape();
           point.strokeWeight(5);
+          point.stroke(0, 100);
           point.vertex(grid.points()[i][j].x, grid.points()[i][j].y);
           point.endShape();
           letter.addChild(point);
