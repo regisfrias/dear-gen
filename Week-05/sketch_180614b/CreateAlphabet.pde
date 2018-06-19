@@ -27,6 +27,7 @@ class CreateAlphabet {
       for (float x = padding; x <= containerWidth + padding - rectWidth; x += rectWidth) {
         if (total < numLetters) {
           letter[total] = new CreateLetter(
+            total,
             lineHeight,
             em,
             gridW,

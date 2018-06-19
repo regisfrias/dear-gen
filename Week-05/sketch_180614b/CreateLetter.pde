@@ -3,6 +3,7 @@ class CreateLetter {
   int numStrokes = int(random(2, 6));
   CreateStroke[] stroke = new CreateStroke[numStrokes];
 
+  int id;
   float lineHeight;
   float em;
   int gridW;
@@ -18,7 +19,8 @@ class CreateLetter {
   float cellW;
   float cellH;
   
-  CreateLetter(float _lineHeight, float _em, int _gridW, int _gridH, float _x, float _y, float _w, float _h){
+  CreateLetter(int _id, float _lineHeight, float _em, int _gridW, int _gridH, float _x, float _y, float _w, float _h){
+    id = _id;
     lineHeight = _lineHeight;
     em = _em;
     gridW = _gridW;
@@ -109,6 +111,16 @@ class CreateLetter {
         grid.points()[0][0].y
       );
       
+      popStyle();
+      
+      pushStyle();
+      fill(0);
+      textAlign(LEFT, TOP);
+      text(
+        latinAlphabet[id],
+        grid.points()[0][0].x - repositionRectX + 5,
+        grid.points()[0][0].y - repositionRectY + 3
+      );
       popStyle();
     }
     

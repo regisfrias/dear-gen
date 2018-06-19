@@ -10,10 +10,8 @@ class CreateStroke {
   
   void draw(){
     if(isStraightLine){
-      //stroke(0);
       line(initialPoint.x, initialPoint.y, supportPoint.x, supportPoint.y);
     } else {
-      //stroke(0);
       this.drawArc(
         initialPoint,
         supportPoint,
