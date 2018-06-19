@@ -4,6 +4,8 @@ import processing.pdf.*;
 // 'r': regenerate alphabet
 // 's': save PDF
 // 'g': show letter grid
+// arrow left/right: increase/decrease gridSubdivisionsW
+// arrow top/down: increase/decrease gridSubdivisionsH
 
 // Set number of points in the letter grid
 // more points make letters more complicated
@@ -51,6 +53,11 @@ void draw(){
     endRecord();
     savePdf = false;
   }
+  
+  pushStyle();
+  fill(0);
+  text("grid size: " + gridSubdivisionsW + "x" + gridSubdivisionsH, 10, height - 10);
+  popStyle();
 }
 
 void createLetters(){
@@ -62,6 +69,22 @@ void createLetters(){
 }
 
 void keyPressed(){
+  
+  switch(keyCode){
+    case 39:
+      gridSubdivisionsW ++;
+      break;
+    case 37:
+      if(gridSubdivisionsW > 2) gridSubdivisionsW --;
+      break;
+    case 38:
+      gridSubdivisionsH ++;
+      break;
+    case 40:
+      if(gridSubdivisionsH > 2) gridSubdivisionsH --;
+      break;
+  }
+  
   switch(key){
     case 's':
       savePdf = true;
