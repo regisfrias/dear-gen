@@ -1,10 +1,14 @@
 import processing.pdf.*;
 
+// Keyboard shortcuts
+// 'r': regenerate alphabet
+// 's': save PDF
+// 'g': show letter grid
+
+// Set number of points in the letter grid
+// more points make letters more complicated
 int gridSubdivisionsW = 3;
 int gridSubdivisionsH = 3;
-
-boolean savePdf = false;
-boolean showGrid = false;
 
 // Set text to write
 String textToWrite = "ALPHABET BY REGIS FRIAS 2018";
@@ -24,6 +28,9 @@ char[][] alphabet = {
 int numLetters = alphabet[alphabetIndex].length;
 
 CreateLetters letters;
+
+boolean savePdf = false;
+boolean showGrid = false;
 
 void setup(){
   size(1022, 638);
