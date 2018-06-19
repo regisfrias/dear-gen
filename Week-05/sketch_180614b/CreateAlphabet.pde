@@ -7,20 +7,40 @@ class CreateLetters {
   float rectWidth;
   float rectHeight;
   float rectRatio = 1.3;
+  float em;
+  float lineHeight;
   
   float containerWidth;
   float containerHeight;
   
+  int[] text;
+  
   CreateLetters(float _lineHeight, float _em){
-    grid = new CreateGrid(_lineHeight, _em, gridSubdivisionsW, gridSubdivisionsH);
+    em = _em;
+    lineHeight= _lineHeight;
+    grid = new CreateGrid(_lineHeight, em, gridSubdivisionsW, gridSubdivisionsH);
     
     this.calculateSizes();
     
-    float strokeWeight = _em/15;
+    float strokeWeight = em/15;
     
     for(int i = 0; i < numLetters; i++){
-      letters[i] = new CreateLetter(grid, _lineHeight, _em, strokeWeight);
+      letters[i] = new CreateLetter(grid, _lineHeight, em, strokeWeight);
     }
+    
+    //println(new String(latinAlphabet).indexOf("E"));
+    
+    String textToWrite = "ALPHABET BY REGIS FRIAS";
+    String[] textToWriteLetters = textToWrite.split("");
+    text = new int[textToWriteLetters.length];
+    
+    for(int i = 0; i < textToWriteLetters.length; i++){
+      text[i] = this.writeText(textToWriteLetters[i]);
+    }
+  }
+  
+  int writeText(String letter){
+    return new String(latinAlphabet).indexOf(letter);
   }
   
   void calculateSizes(){
@@ -60,7 +80,11 @@ class CreateLetters {
     }
     
     // Write some text with alphabet
-    shape(letters[0].returnLetter(), padding, height-padding);
-    
+    for(int i = 0; i < text.length; i++){
+      int id = text[i];
+      if(id >= 0) {
+        shape(letters[id].returnLetter(), padding + em*i, height-padding);
+      }
+    }
   }
 }
