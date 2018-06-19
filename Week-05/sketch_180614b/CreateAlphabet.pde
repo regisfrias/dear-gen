@@ -71,6 +71,12 @@ class CreateLetters {
       for (float x = padding; x <= containerWidth + padding - rectWidth; x += rectWidth) {
         if (total < numLetters) {
           shape(letters[total].returnLetter(), x, y);
+          if(showGrid){
+            pushStyle();
+            fill(0);
+            text(alphabet[alphabetIndex][total], x - 10, y - 10);
+            popStyle();
+          }
         }
         total++;
       }
