@@ -28,9 +28,6 @@ class CreateLetters {
       letters[i] = new CreateLetter(grid, _lineHeight, em, strokeWeight);
     }
     
-    //println(new String(latinAlphabet).indexOf("E"));
-    
-    String textToWrite = "ALPHABET BY REGIS FRIAS";
     String[] textToWriteLetters = textToWrite.split("");
     text = new int[textToWriteLetters.length];
     
@@ -40,7 +37,7 @@ class CreateLetters {
   }
   
   int writeText(String letter){
-    return new String(latinAlphabet).indexOf(letter);
+    return new String(alphabet[alphabetIndex]).indexOf(letter);
   }
   
   void calculateSizes(){
