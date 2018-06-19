@@ -1,6 +1,6 @@
-class CreateAlphabet {
-  int numLetters;
-  CreateLetter[] letter;
+class CreateLetters {
+  CreateGrid grid;
+  CreateLetter[] letters = new CreateLetter[numLetters];
   
   int padding = width/12;
   float containerRatio;
@@ -11,35 +11,13 @@ class CreateAlphabet {
   float containerWidth;
   float containerHeight;
   
-  CreateAlphabet(int _numLetters){
-    numLetters = _numLetters;
-    letter = new CreateLetter[numLetters];
+  CreateLetters(float _lineHeight, float _em){
+    grid = new CreateGrid(_lineHeight, _em, gridSubdivisionsW, gridSubdivisionsH);
     
     this.calculateSizes();
-
-    int gridW = 3;
-    int gridH = 3;
-    float em = rectWidth * 0.9;
-    float lineHeight = em / 0.75;
     
-    int total = 0;
-    for (float y = padding; y <= containerHeight + padding; y += rectHeight) {
-      for (float x = padding; x <= containerWidth + padding - rectWidth; x += rectWidth) {
-        if (total < numLetters) {
-          letter[total] = new CreateLetter(
-            total,
-            lineHeight,
-            em,
-            gridW,
-            gridH,
-            x,
-            y,
-            rectWidth,
-            rectHeight
-          );
-        }
-        total++;
-      }
+    for(int i = 0; i < numLetters; i++){
+      letters[i] = new CreateLetter(grid, _lineHeight, _em);
     }
   }
   
@@ -67,9 +45,20 @@ class CreateAlphabet {
     }
   }
   
-  void draw(){
-    for(int i = 0; i < numLetters; i++){
-      letter[i].draw();
+  void returnLetters(){
+    
+    int total = 0;
+    for (float y = padding; y <= containerHeight + padding; y += rectHeight) {
+      for (float x = padding; x <= containerWidth + padding - rectWidth; x += rectWidth) {
+        if (total < numLetters) {
+          shape(letters[total].returnLetter(), x, y);
+        }
+        total++;
+      }
     }
+    
+    
+    shape(letters[0].returnLetter(), padding, height-padding);
+    
   }
 }

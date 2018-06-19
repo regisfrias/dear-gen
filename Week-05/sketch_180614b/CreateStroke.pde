@@ -2,15 +2,23 @@ class CreateStroke {
   boolean isStraightLine = random(1) > 0.5 ? true : false;
   PVector initialPoint;
   PVector supportPoint;
+  PShape stroke = createShape();
   
   CreateStroke(PVector _initialPoint, PVector _supportPoint){
     initialPoint = _initialPoint;
     supportPoint = _supportPoint;
   }
   
-  void draw(){
+  PShape returnStroke(){
+    stroke.beginShape(LINES); // @REVIEW: not using 'LINES' as a param causes weird rendering
+    stroke.noFill();
+    stroke.strokeWeight(strokeWeight);
+    stroke.strokeCap(ROUND);
+    stroke.strokeJoin(ROUND);
+    
     if(isStraightLine){
-      line(initialPoint.x, initialPoint.y, supportPoint.x, supportPoint.y);
+      stroke.vertex(initialPoint.x, initialPoint.y);
+      stroke.vertex(supportPoint.x, supportPoint.y);
     } else {
       this.drawArc(
         initialPoint,
@@ -18,6 +26,9 @@ class CreateStroke {
         180
       );
     }
+    stroke.endShape();
+    
+    return stroke;
   }
 
   void drawArc(PVector initialPoint, PVector supportPoint, float arcAngle){
@@ -38,7 +49,8 @@ class CreateStroke {
       float y1 = sin(radians(theta)) * radius + center.y;
       float x2 = cos(radians(theta-angleIncr)) * radius + center.x;
       float y2 = sin(radians(theta-angleIncr)) * radius + center.y;
-      line(x1, y1, x2, y2);
+      stroke.vertex(x1, y1);
+      stroke.vertex(x2, y2);
     }
   }
 }

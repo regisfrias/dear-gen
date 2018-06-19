@@ -12,13 +12,11 @@ class CreateGrid {
   float cellW;
   float cellH;
   
-  CreateGrid(float _lineHeight, float _em, int _gridW, int _gridH, float _x, float _y){
+  CreateGrid(float _lineHeight, float _em, int _gridW, int _gridH){
     lineHeight = _lineHeight;
     em = _em;
     gridW = _gridW;
     gridH = _gridH;
-    x = _x;
-    y = _y;
     
     vector = new PVector[int(gridW)][int(gridH)];
     cellW = em/gridW;
@@ -29,7 +27,7 @@ class CreateGrid {
   PVector[][] points(){
     for(int i = 0; i < gridW; i++){
       for(int j = 0; j < gridH; j++){
-        vector[i][j] = new PVector(i*cellW + x, j*cellH + y);
+        vector[i][j] = new PVector(i*cellW, j*cellH);
       }
     }
     
