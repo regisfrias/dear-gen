@@ -28,7 +28,7 @@ class CreateLetters {
       letters[i] = new CreateLetter(grid, _lineHeight, em, strokeWeight);
     }
     
-    String[] textToWriteLetters = textToWrite.split("");
+    String[] textToWriteLetters = textToWrite.toUpperCase().split("");
     text = new int[textToWriteLetters.length];
     
     for(int i = 0; i < textToWriteLetters.length; i++){

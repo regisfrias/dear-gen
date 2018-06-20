@@ -14,7 +14,7 @@ int gridSubdivisionsW = 3;
 int gridSubdivisionsH = 3;
 
 // Set text to write
-String textToWrite = "ALPHABET BY REGIS FRIAS 2018";
+String textToWrite = "Alphabet by Regis Frias 2018";
 
 // Set which alphabet to use
 int alphabetIndex = 3;
