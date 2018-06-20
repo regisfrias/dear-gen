@@ -1,12 +1,19 @@
 import processing.pdf.*;
 
-// Keyboard shortcuts
-// 'r': regenerate alphabet
-// 's': save PDF
-// 'g': show letter grid
-// arrow left/right: increase/decrease gridSubdivisionsW
-// arrow top/down: increase/decrease gridSubdivisionsH
-// '.' (point): to loop through alphabets and regenerate alphabet
+/*******************
+
+  ===================
+  Keyboard shortcuts:
+  ===================
+  
+  * 'r': regenerate alphabet
+  * 's': save PDF
+  * 'g': show letter grid
+  * arrow left/right: increase/decrease gridSubdivisionsW
+  * arrow top/down: increase/decrease gridSubdivisionsH
+  * '.' (point): to loop through alphabets and regenerate alphabet
+
+********************/
 
 // Set number of points in the letter grid
 // more points make letters more complicated
