@@ -65,7 +65,6 @@ class CreateLetters {
   }
   
   void returnLetters(){
-    
     int total = 0;
     for (float y = padding; y <= containerHeight + padding; y += rectHeight) {
       for (float x = padding; x <= containerWidth + padding - rectWidth; x += rectWidth) {
@@ -81,7 +80,9 @@ class CreateLetters {
         total++;
       }
     }
-    
+  }
+  
+  void writeText(){
     // Write some text with alphabet
     for(int i = 0; i < text.length; i++){
       int id = text[i];

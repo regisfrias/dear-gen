@@ -3,10 +3,6 @@ class CreateGrid {
   float em;
   int gridW;
   int gridH;
-  float x;
-  float y;
-  float w;
-  float h;
   
   PVector[][] vector;
   float cellW;

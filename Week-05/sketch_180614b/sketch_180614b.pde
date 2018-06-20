@@ -6,6 +6,7 @@ import processing.pdf.*;
 // 'g': show letter grid
 // arrow left/right: increase/decrease gridSubdivisionsW
 // arrow top/down: increase/decrease gridSubdivisionsH
+// '.' (point): to loop through alphabets and regenerate alphabet
 
 // Set number of points in the letter grid
 // more points make letters more complicated
@@ -17,6 +18,12 @@ String textToWrite = "ALPHABET BY REGIS FRIAS 2018";
 
 // Set which alphabet to use
 int alphabetIndex = 3;
+String[] alphabetsList = {
+  "Latin (English)",
+  "Latin with numbers",
+  "Finnish/Swedish",
+  "Finnish/Swedish with numbers"
+};
 char[][] alphabet = {
   // 0: Latin (English)
   {'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'},
@@ -49,14 +56,22 @@ void draw(){
   
   letters.returnLetters();
   
+  letters.writeText();
+  
   if(savePdf){
     endRecord();
     savePdf = false;
   }
   
   pushStyle();
-  fill(0);
-  text("grid size: " + gridSubdivisionsW + "x" + gridSubdivisionsH, 10, height - 10);
+  fill(80);
+  String info =
+    "Grid size: " + gridSubdivisionsW + 
+    " horizontal, " + gridSubdivisionsH +
+    " vertical (user keyboard arrows to change)" +
+    "      Base alphabet: " + alphabetsList[alphabetIndex]
+  ; 
+  text(info, 10, height - 10);
   popStyle();
 }
 
@@ -94,6 +109,16 @@ void keyPressed(){
       break;
     case 'r':
       createLetters();
+      break;
+    case '.':
+      // Loop through alphabetsList
+      if(alphabetIndex > alphabetsList.length-2){
+        alphabetIndex = 0;
+      } else {
+        alphabetIndex++;
+      }
+      numLetters = alphabet[alphabetIndex].length;
+      createLetters(); // recreate alphabet
       break;
   }
 }
