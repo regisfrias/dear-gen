@@ -2,7 +2,7 @@ import processing.pdf.*;
 int spacing = 2;
 
 void setup() {
-  size(511, 319);
+  size(551, 359);
   noLoop();
 }
 
