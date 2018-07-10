@@ -4,28 +4,29 @@
  * 
  * Using 2D noise to create simple texture. 
  */
- 
+
+import processing.pdf.*;
+
 float increment = 0.01;
 int gridSize = 5;
 int lineLength = gridSize*2;
 
 void setup() {
-  size(960, 740, P3D);
+  size(920, 580, P3D);
   strokeWeight(1);
   noLoop();
 }
 
 void draw() {
+  String fileName = "saved/" + year() + "-" + month() + "-" + day() + "-" + hour() + "-" + minute() + "-" + second() + "-flow.pdf";
+  beginRecord(PDF, fileName);
   colorMode(HSB, 360, 360, 360, 360);
   
-  float ang = 50;
-  background(ang, ang/2, 360, 360);
+  float ang = 240;
+  background(ang, ang/2, ang/2, 360);
   
-  //stroke(0, 40);
-  //fill(0, 20);
   noFill();
   strokeWeight(gridSize);
-  //noStroke();
 
   float xoff = 0.0; // Start xoff at 0
   float xoff2 = xoff + increment;
@@ -39,7 +40,6 @@ void draw() {
     xoff2 += increment;
     
     float yoff = 0.0;   // For every xoff, start yoff at 0
-    float yoff2 = yoff + increment;
     
     for (int y = 0; y < height; y += gridSize) {
       yoff += increment; // Increment yoff
@@ -56,4 +56,11 @@ void draw() {
       line(x1, y1, x2, y2);
     }
   }
+  
+  endRecord();
+  
+  String fileName2 = "saved-png/" + year() + "-" + month() + "-" + day() + "-" + hour() + "-" + minute() + "-" + second() + "-flow.png";
+  saveFrame(fileName2);
+  
+  exit();
 }
