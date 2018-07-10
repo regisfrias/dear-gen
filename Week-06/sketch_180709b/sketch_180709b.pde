@@ -10,11 +10,13 @@ import processing.pdf.*;
 float increment = 0.01;
 int gridSize = 5;
 int lineLength = gridSize*2;
+float initAngle;
 
 void setup() {
   size(920, 580, P3D);
   strokeWeight(1);
   noLoop();
+  initAngle = random(-360, 360);
 }
 
 void draw() {
@@ -52,7 +54,7 @@ void draw() {
       float x2 = cos(radians(angle+180)) * lineLength + x;
       float y2 = sin(radians(angle+180)) * lineLength + y;
       
-      stroke(angle, angle/3, angle/3, angle);
+      stroke(angle + initAngle, angle/3, angle/3, angle);
       line(x1, y1, x2, y2);
     }
   }
