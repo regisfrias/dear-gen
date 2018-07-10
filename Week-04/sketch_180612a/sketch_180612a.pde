@@ -7,7 +7,8 @@ void setup() {
 }
 
 void draw() {
-  beginRecord(PDF, "file.pdf");
+  String fileName = "saved/" + year() + "-" + month() + "-" + day() + "-" + hour() + "-" + minute() + "-" + second() + "-infinitesimal.pdf";
+  beginRecord(PDF, fileName);
   background(255);
   
   generateGrid(true, false);
