@@ -5,23 +5,28 @@ ArrayList<Rectangle> rectangles = new ArrayList<Rectangle>();
 float initW;
 float initH;
 float diag;
+boolean isDone = false;
 
 void setup() {
   size(920, 580);
   noStroke();
   colorMode(HSB, 100, 100, 100, 100);
   
-  initW = width/13;
-  initH = height/13;
+  initW = width/17;
+  initH = height/17;
   
   for(int i = 0; i < width; i += initW){
     for(int j = 0; j < height; j += initH){
-      float w = random(initW/4, initW/1.5);
-      float h = random(initW/4, initW/1.5);
+      float w = random(initW/3, initW/1.5);
+      float h = random(initW/3, initW/1.5);
+      float randomI = random(-initW/10, initH/10) - w/2;
+      float randomJ = random(-initW/10, initH/10) - h/2;
+      //float randomI = -w/2;
+      //float randomJ = -h/2;
       float hue = random(1) > 0.2 ? 6 : 28;
       rectangles.add(new Rectangle(
-        i + random(-initW/2, initH/2),
-        j + random(-initW/2, initH/2),
+        i + randomI,
+        j + randomJ,
         w, h, hue
       ));
     }
@@ -30,7 +35,14 @@ void setup() {
 
 void draw() {
   background(0, 0, 20);
-
+  
+  if(isDone){
+    background(0, 0, 70);
+  } else {
+    isDone();
+    background(0, 0, 50);
+  }
+  
   //iterate over the rectangles
   for (int i = 0; i < rectangles.size(); i++) {
     Rectangle rectangle = rectangles.get(i);
@@ -43,21 +55,21 @@ void draw() {
       Rectangle rectangle2 = rectangles.get(j);
       
       if(i != j){ // except with itself
-        boolean checkX = (
+        boolean checkCollision = (
             rectangle2.x + rectangle2.rectWidth > rectangle.x && 
             rectangle2.x < rectangle.x + rectangle.rectWidth &&
             rectangle2.y + rectangle2.rectHeight > rectangle.y && 
             rectangle2.y < rectangle.y + rectangle.rectHeight
           ) ||
-          rectangle.x < 0 ||
-          rectangle.x + rectangle.rectWidth > width ||
-          rectangle.y < 0 ||
-          rectangle.y + rectangle.rectHeight > height
+          rectangle.x < -initW ||
+          rectangle.x + rectangle.rectWidth > width + initW ||
+          rectangle.y < -initH ||
+          rectangle.y + rectangle.rectHeight > height + initH
         ;
         
-        if(checkX){
-          rectangle.x += random(-initW/4, initW/4);
-          rectangle.y += random(-initH/4, initH/4);
+        if(checkCollision){
+          rectangle.x += random(-initW/8, initW/8);
+          rectangle.y += random(-initH/8, initH/8);
         }
       }
     }
@@ -73,6 +85,15 @@ void draw() {
 
     drawRect(rectangle);
   }
+}
+
+boolean isDone(){
+  for (int i = 0; i < rectangles.size(); i++) {
+    Rectangle rectangle = rectangles.get(i);
+    if(!rectangle.done) return false;
+  }
+  isDone = true;
+  return true;
 }
 
 void drawRect(Rectangle rectangle){
