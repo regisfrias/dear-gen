@@ -4,8 +4,8 @@
 ArrayList<Rectangle> rectangles = new ArrayList<Rectangle>();
 float initW;
 float initH;
-float diag;
 boolean isDone = false;
+boolean saveFile = false;
 
 void setup() {
   size(920, 580);
@@ -19,28 +19,42 @@ void setup() {
     for(int j = 0; j < height; j += initH){
       float w = random(initW/3, initW/1.5);
       float h = random(initW/3, initW/1.5);
-      float randomI = random(-initW/10, initH/10) - w/2;
-      float randomJ = random(-initW/10, initH/10) - h/2;
-      //float randomI = -w/2;
-      //float randomJ = -h/2;
+      //float randomI = random(-initW/10, initH/10) - w/2;
+      //float randomJ = random(-initW/10, initH/10) - h/2;
+      float randX = random(0, width);
+      float randY = random(0, height);
       float hue = random(1) > 0.2 ? 6 : 28;
+      
+      String path = sketchPath() + "/data/roofs";
+      
+      if(hue < 10){
+        path = sketchPath() + "/data/roofs";
+      } else {
+        path = sketchPath() + "/data/greens";
+      }
+      
+      File[] files = listFiles(path);
+     
+      int randomIndex = int(random(files.length));
+      File f = files[randomIndex];
+      PImage img = loadImage(path + "/" +f.getName());
+      
       rectangles.add(new Rectangle(
-        i + randomI,
-        j + randomJ,
-        w, h, hue
+        //i + randomI,
+        //j + randomJ,
+        randX, randY,
+        w, h, hue,
+        img
       ));
     }
   }
+  
+  background(0, 0, 100);
 }
 
 void draw() {
-  background(0, 0, 20);
-  
-  if(isDone){
-    background(0, 0, 70);
-  } else {
+  if(!isDone){
     isDone();
-    background(0, 0, 50);
   }
   
   //iterate over the rectangles
@@ -85,6 +99,19 @@ void draw() {
 
     drawRect(rectangle);
   }
+  
+  if(saveFile){
+    String fileName = "saved-png/" + year() + "-" + month() + "-" + day() + "-" + hour() + "-" + minute() + "-" + second() + "-telhado.pdf";
+    saveFrame(fileName);
+    saveFile = false;
+  }
+  
+  if(isDone){
+    String fileName = "saved-png/" + year() + "-" + month() + "-" + day() + "-" + hour() + "-" + minute() + "-" + second() + "-telhado.pdf";
+    saveFrame(fileName);
+    exit();
+  }
+
 }
 
 boolean isDone(){
@@ -97,12 +124,22 @@ boolean isDone(){
 }
 
 void drawRect(Rectangle rectangle){
+  image(rectangle.img, rectangle.x, rectangle.y, rectangle.rectWidth, rectangle.rectHeight);
+}
   
-  if(rectangle.done){
-    fill(rectangle.hue, 60, 40);
+String[] listFileNames(String dir) {
+  File file = new File(dir);
+  if (file.isDirectory()) {
+    String names[] = file.list();
+    return names;
   } else {
-    fill(0,0,70);
+    // If it's not a directory
+    return null;
   }
-  
-  rect(rectangle.x, rectangle.y, rectangle.rectWidth, rectangle.rectHeight);
+}
+
+void keyPressed(){
+  if(key == 's'){
+    saveFile = true;
+  }
 }

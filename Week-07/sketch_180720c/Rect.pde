@@ -6,6 +6,7 @@ class Rectangle {
   float rectWidth;
   float rectHeight;
   float hue;
+  PImage img;
   boolean done;
 
   public Rectangle(
@@ -13,7 +14,8 @@ class Rectangle {
     float y,
     float rectWidth,
     float rectHeight,
-    float hue
+    float hue,
+    PImage img
   ){
     this.x = x;
     this.y = y;
@@ -21,5 +23,6 @@ class Rectangle {
     this.rectHeight = rectHeight;
     this.hue = hue;
     this.done = false;
+    this.img = img;
   }
 }
