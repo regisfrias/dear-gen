@@ -92,18 +92,22 @@ void createLetters(){
 
 void keyPressed(){
   
-  switch(keyCode){
-    case 39:
+switch(keyCode){
+    case RIGHT:
       gridSubdivisionsW ++;
+      createLetters();
       break;
-    case 37:
+    case LEFT:
       if(gridSubdivisionsW > 2) gridSubdivisionsW --;
+      createLetters();
       break;
-    case 38:
+    case UP:
       gridSubdivisionsH ++;
+      createLetters();
       break;
-    case 40:
+    case DOWN:
       if(gridSubdivisionsH > 2) gridSubdivisionsH --;
+      createLetters();
       break;
   }
   
