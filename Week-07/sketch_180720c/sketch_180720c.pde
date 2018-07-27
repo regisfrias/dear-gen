@@ -10,7 +10,6 @@ boolean saveFile = false;
 void setup() {
   size(920, 580);
   noStroke();
-  colorMode(HSB, 100, 100, 100, 100);
   
   initW = width/17;
   initH = height/17;
@@ -49,7 +48,7 @@ void setup() {
     }
   }
   
-  background(0, 0, 100);
+  background(255);
 }
 
 void draw() {
