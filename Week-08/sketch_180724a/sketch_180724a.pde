@@ -8,12 +8,14 @@ void setup(){
 
 void draw(){
   background(240, 50, 40);
-  
   fill(0, 0, 100);
   ellipse(width/2 + width/8, height/2, width/9, width/9);
   
   //drawArcs(.53);
   drawArcs(.12);
+  
+  String fileName = "saved-png/" + year() + "-" + month() + "-" + day() + "-" + hour() + "-" + minute() + "-" + second() + "-telhado.pdf";
+  saveFrame(fileName);
 }
 
 void drawArcs(float incr){
