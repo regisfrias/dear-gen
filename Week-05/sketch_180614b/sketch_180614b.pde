@@ -23,7 +23,7 @@ int gridSubdivisionsH = 3;
 // Set text to write
 String textToWrite = "Alphabet by Regis Frias 2018";
 
-// Set which alphabet to use
+// Set initial alphabet
 int alphabetIndex = 3;
 String[] alphabetsList = {
   "Latin (English)",

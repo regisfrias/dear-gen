@@ -45,7 +45,7 @@ class CreateStroke {
     float deltaX = center.x - initialPoint.x;
     float deltaY = center.y - initialPoint.y;
     float initAngle = atan2(deltaY, deltaX)*180.0/PI;
-    
+   
     for (float theta = initAngle; theta <= arcAngle + initAngle; theta += angleIncr) {
       float x1 = cos(radians(theta)) * radius + center.x;
       float y1 = sin(radians(theta)) * radius + center.y;

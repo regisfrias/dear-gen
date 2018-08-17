@@ -41,10 +41,10 @@ class CreateLetter {
     
     if(showGrid) {
       PShape rect = createShape();
+      rect.setStroke(100);
+      rect.setFill(false);
       rect.beginShape();
       rect.strokeWeight(1);
-      rect.noFill();
-      rect.stroke(0, 100);
       rect.vertex(grid.points()[0][0].x, grid.points()[0][0].y);
       rect.vertex(grid.points()[gridSubdivisionsW-1][0].x, grid.points()[gridSubdivisionsW-1][0].y);
       rect.vertex(grid.points()[gridSubdivisionsW-1][gridSubdivisionsH-1].x, grid.points()[gridSubdivisionsW-1][gridSubdivisionsH-1].y);
@@ -54,12 +54,9 @@ class CreateLetter {
       
       for(int i = 0; i < gridSubdivisionsW; i++){
         for(int j = 0; j < gridSubdivisionsH; j++){
-          PShape point = createShape();
-          point.beginShape();
-          point.strokeWeight(5);
-          point.stroke(0, 100);
-          point.vertex(grid.points()[i][j].x, grid.points()[i][j].y);
-          point.endShape();
+          PShape point = createShape(ELLIPSE, grid.points()[i][j].x, grid.points()[i][j].y, 5, 5);
+          point.setFill(color(100));
+          point.setStroke(false);
           letter.addChild(point);
         }
       }
