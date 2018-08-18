@@ -1,8 +1,6 @@
 /**
- * Noise2D 
- * by Daniel Shiffman.  
- * 
- * Using 2D noise to create simple texture. 
+ * Based on Noise2D
+ * by Daniel Shiffman.
  */
 
 import processing.pdf.*;
@@ -31,15 +29,12 @@ void draw() {
   strokeWeight(gridSize);
 
   float xoff = 0.0; // Start xoff at 0
-  float xoff2 = xoff + increment;
-  //float detail = map(mouseX, 0, width, 0.1, 0.8);
   float detail = 0.8;
   noiseDetail(8, detail);
   
   // For every x,y coordinate in a 2D space, calculate a noise value and produce a brightness value
   for (int x = 0; x < width; x += gridSize) {
     xoff += increment;   // Increment xoff
-    xoff2 += increment;
     
     float yoff = 0.0;   // For every xoff, start yoff at 0
     
