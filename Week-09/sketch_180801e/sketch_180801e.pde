@@ -9,7 +9,7 @@ void settings(){
 
 void setup(){
   pantanal.loadPixels();
-  //noLoop();
+  noLoop();
   colorMode(HSB, 100, 100, 100, 100);
 }
 
@@ -22,6 +22,8 @@ void draw(){
   for(int y = 0; y < height - bandHeight; y += bandHeight){
     drawBand(y);
   }
+  
+  saveFrame("saved-png/" + year() + "-" + month() + "-" + day() + "-" + hour() + "-" + minute() + "-" + second() + "-pantanal.png");
 }
 
 void drawBand(int y){
