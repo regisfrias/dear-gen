@@ -32,69 +32,33 @@ void draw(){
     sky();
   }
   
+  landscape();
+}
+
+void landscape(){
   for(int i = 0; i < 6; i++){
-    float breakpoint = random(width/5, width/3);
-    float top = random(21, 24);
-    landscape(breakpoint, top);
+    float freq = random(5, 10);
+    float ampl = random(height/10, height/2);
+    waves(freq, ampl);
   }
 }
 
-void landscape(float breakpoint, float top){
+void waves(float freq, float ampl){
   noFill();
-  
-  for(float x = padding; x < width - padding; x += stepX){
-    strokeWeight(0.5);
-    if(x > padding){
-      float prevX = x - stepX;
-      bezLine(prevX, x, breakpoint, top);
-    }
-  }
-}
-
-void bezLine(float prevX, float currX, float breakpoint, float top){
-  float lineStep = stepX/20;
-  float offsetY = 0;
-  float offsetX = 0;
-  float alpha = 0;
-  if(currX <= breakpoint){
-    offsetY = pow(map(currX, 0, breakpoint, 0, 1.3), top);
-    offsetX = pow(map(currX, 0, breakpoint, 0, 2), 5);
-    alpha = map(currX, 0, breakpoint, 5, 80);
-  } else {
-    offsetY = pow(map(currX, breakpoint, width, 1.3, 0), top);
-    offsetX = pow(map(currX, breakpoint, width, 2, 0), 5);
-    alpha = map(currX, breakpoint, width, 80, 5);
-  }
-  
-  stroke(0, 0, 0, alpha);
-  
+  stroke(200, 90, 20, 60);
   beginShape();
-  vertex(prevX, lastY);
-  for(float x = prevX; x <= currX; x += lineStep){
-    float y = (height - padding*2 + stepY) + stepY + random(-offsetY, height/100);
-    if(x == currX){
-      vertex(x, y);
-      lastY = y;
-    } else {
-      curveVertex(
-        x + random(-offsetX, offsetX),
-        //x,
-        prevX == x ? lastY : y
-      );
-    }
+  for(int x = width - padding; x > padding; x -= 1){
+    
+    float angleY = sin(radians(map(x, 0, width, 0, 360 * freq) + 180));
+    float angleY2 = sin(radians(map(x, 0, width, 0, 360/2) + 30));
+    float angleY3 = sin(radians(map(x, 0, width, 180, 360) + 30));
+    
+    // angleY3 to the [odd number] will make the wave go up
+    // large numbers make the spike narrow
+    float y = (angleY * pow(angleY2, 3) * height/20) + (pow(angleY3, 301) * ampl) + height - padding - stepY;
+    vertex(x, y);
   }
   endShape();
-  
-  //beginShape();
-  //for(float x = prevX; x <= currX; x += lineStep){
-  //  float y = (height - padding*2 + stepY) + random(-20, 20);
-  //  vertex(
-  //    x,
-  //    prevX == x ? lastY : y
-  //  );
-  //  lastY = y;
-  //}
-  //endShape();
 }
 
 void sky(){
@@ -111,8 +75,8 @@ void sky(){
       float brightnessOffset = random(-5, 5);
       
       float hue = map(y, 0, height, 220, 170) + hueOffset;
-      float saturation = map(y, 0, height, 50, 20);
-      float brightness = map(y, 0, height, 60, 80) + brightnessOffset;
+      float saturation = map(y, 0, height, 40, 20);
+      float brightness = map(y, 0, height, 60, 90) + brightnessOffset;
       
       pushMatrix();
       fill(hue, saturation, brightness, 50);
@@ -126,5 +90,11 @@ void sky(){
       );
       popMatrix();
     }
+  }
+}
+
+void keyPressed(){
+  if(key == 'r'){
+    println(key);
   }
 }
