@@ -25,13 +25,7 @@ void setup(){
 }
 
 void draw(){
-  background(0, 0, 100);
-  
-  noStroke();
-  for(int i = 0; i < 10; i++){
-    sky();
-  }
-  
+  repeatSky();
   landscape();
 }
 
@@ -59,6 +53,14 @@ void waves(float freq, float ampl){
     vertex(x, y);
   }
   endShape();
+}
+
+void repeatSky(){
+  background(0, 0, 100);
+  noStroke();
+  for(int i = 0; i < 10; i++){
+    sky();
+  }
 }
 
 void sky(){
@@ -94,7 +96,7 @@ void sky(){
 }
 
 void keyPressed(){
-  if(key == 'r'){
-    println(key);
+  if(key == 's'){
+    saveFrame("saved-png/" + year() + "-" + month() + "-" + day() + "-" + hour() + "-" + minute() + "-" + second() + "-autumn.png");
   }
 }
