@@ -9,6 +9,17 @@ void draw(){
   background(60, 30,100);
   //background(0,0,0);
   
+  for(int i = 0; i < width; i++){
+    float h = map(i, 0, width, 0, 40);
+    float s = map(i, 0, width, 0, 100);
+
+    stroke(h, s, 100);
+    line(i, 0, i, height);
+  }
+  
+  
+  noStroke();
+
   
   
   blendMode(MULTIPLY);
@@ -16,8 +27,6 @@ void draw(){
   bg(0, height/2, width, -height/2, true);
   
   blendMode(ADD);
-  
-  //blendMode(BLEND);
   xenakis(0, height/2, width, height/2, true);
   xenakis(0, height/2, width, -height/2, true);
   
