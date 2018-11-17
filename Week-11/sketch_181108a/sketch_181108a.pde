@@ -1,7 +1,10 @@
+float vStep;
+
 void setup(){
   //size(580, 920);
   size(464, 736);
   noLoop();
+  vStep = height/10;
 }
 
 void draw(){
@@ -12,8 +15,7 @@ void draw(){
   //xenakis(height/2, height/8, 5);
   //xenakis(height - 20, height/2, 21);
   
-  float vStep = height/40;
-  for(int y = 0; y <= height; y += vStep){
+  for(int y = 0; y <= height + vStep; y += vStep){
     int pow = int(map(y, 0, height, 5, 21));
     if(pow % 2 == 0){
       pow += 1;
@@ -25,28 +27,37 @@ void draw(){
 }
 
 void xenakis(float top, float ampl, float pow){
-  beginShape();
+  halfXenakis(top, ampl, pow, true);
+  halfXenakis(top, ampl, pow, false);
+}
+
+void halfXenakis(float top, float ampl, float pow, boolean firstHalf){
+  float step = width/60;
+  int addAngle = firstHalf ? -20 : 20;
+  float begin = firstHalf ? 0 : width/2;
+  float end = firstHalf ? width/2 : width;
+  float threshold = firstHalf ? 0 : width/2;
   
-  float step = width/40;
-  for(float x = 0; x <= width/2; x += step){
-    if(x > 0){
+  beginShape();
+  for(float x = begin; x <= end; x += step){
+    if(x > threshold){
       float prevX = x - step;
       
-      float angleX = map(x, 0, width, 180, 360 - 20);
-      float anglePrevX = map(prevX, 0, width, 180, 360 - 20);
+      float angleX = map(x, 0, width, 180, 360 + addAngle);
+      float anglePrevX = map(prevX, 0, width, 180, 360 + addAngle);
       
       float angleY = sin(radians(angleX));
       float anglePrevY = sin(radians(anglePrevX));
       float y = (pow(angleY, pow) * ampl) + top;
       float prevY = (pow(anglePrevY, pow) * ampl) + top;
       
-      float oscX = sin(radians(angleX))/2 + 1.5;
-      float oscPrevX = sin(radians(anglePrevX))/2 + 1.5;
+      float oscX = (sin(radians(angleX - 90))/2 + 1) * step*2;
+      float oscPrevX = (sin(radians(anglePrevX - 90))/2 + 1) * step*2;
       
-      vertex(prevX * oscPrevX, top+20);
+      vertex(prevX + oscPrevX, top+vStep);
       vertex(prevX, prevY);
       vertex(x, y);
-      vertex(x * oscX, top+20);
+      vertex(x + oscX, top+vStep);
     }
   }
   endShape(CLOSE);
