@@ -13,7 +13,7 @@ float freqX = 1;
 float freqY = 1;
 
 void setup(){
-  size(900, 600);
+  size(920, 580);
   variationX = 40;
   variationY = 40;
   
