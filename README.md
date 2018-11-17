@@ -21,3 +21,15 @@ We are writing about each week as we go and the compiled text can be found at ht
 
 ### [Week 5: Alphabet](Week-05)
 ![](img/05.png)
+
+### [Week 6: Flow](Week-06)
+![](img/06.png)
+
+### [Week 7: Roof](Week-07)
+![](img/07.png)
+
+### [Week 8: Birth](Week-08)
+![](img/08.png)
+
+### [Week 9: Pantanal](Week-09)
+![](img/09.png)
