@@ -21,6 +21,8 @@ void draw(){
   drawWave();
   drawWave2();
   
+  String fileName = "saved/" + year() + "-" + month() + "-" + day() + "-" + hour() + "-" + minute() + "-" + second() + "-pixels.png";
+  saveFrame(fileName);
 }
 
 
@@ -69,9 +71,6 @@ void drawWave2(){
     }
   }
 }
-
-
-
 
 void drawWave(){
   for(float j = 0; j < 1; j += incrY){
