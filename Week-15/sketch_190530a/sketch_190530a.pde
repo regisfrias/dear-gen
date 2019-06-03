@@ -2,7 +2,7 @@ float padding;
 
 void setup(){
   //size(580, 920);
-  size(580, 820);
+  size(580, 820, P2D);
   padding = width/6;
   noLoop();
 }
@@ -20,12 +20,13 @@ void draw(){
 }
 
 PVector drawTriangle(PVector startPoint) {
-  //float increment = map(startPoint.y, padding, height - padding, padding, padding/5);
+  //float increment = map(startPoint.y, padding, height - padding, padding * 0.8, padding * 0.3);
   float increment = padding * 0.6;
   float endPointY = startPoint.y + increment;
-  float mapEndPoint = map(endPointY, padding, height - padding, padding, width/2 - padding/2); 
+  float mapEndPoint = map(endPointY, padding, height - padding, padding, width/2 - padding/2);
+  float endPointRandomFactor = random(-padding, padding); // break teleology
   float endPointX = startPoint.x < width/2 ? width - mapEndPoint : mapEndPoint;
-  PVector endPoint = new PVector(endPointX, endPointY);
+  PVector endPoint = new PVector(endPointX + endPointRandomFactor, endPointY);
   float slope = (startPoint.y - endPoint.y) / (startPoint.x - endPoint.x);
   
   float distanceToNewPoint = height/2;
@@ -46,41 +47,44 @@ PVector drawTriangle(PVector startPoint) {
   // Angle between center and endPoint
   float angEnd = atan2(endPoint.y - center.y, endPoint.x - center.x);
   
-  fill(240, 240);
-  float angStep = QUARTER_PI/60;
-  float radiusVar = radius/20;
+  float angStep = QUARTER_PI/20;
+  float radiusVar = radius/12;
+  float ang1 = 0;
+  float ang2 = 0;
   if(angStart < angEnd){
-    for(float ang = angStart; ang < angEnd; ang += angStep){
-      float x = cos(ang) * (radius + radiusVar) + center.x;
-      float y = sin(ang) * (radius + radiusVar) + center.y;
-      float x2 = cos(ang) * (radius - radiusVar) + center.x;
-      float y2 = sin(ang) * (radius - radiusVar) + center.y;
-      //ellipse(x, y, 5, 5);
-      //stroke(0, 100);
-      //line(x, y, x2, y2);
-      beginShape();
-      vertex(x, y);
-      vertex(x+6, y);
-      vertex(x2+6, y2);
-      vertex(x2, y2);
-      endShape(CLOSE);
-    }
+    ang1 = angStart;
+    ang2 = angEnd;
   } else {
-    for(float ang = angEnd; ang < angStart; ang += angStep){
-      float x = cos(ang) * (radius + radiusVar) + center.x;
-      float y = sin(ang) * (radius + radiusVar) + center.y;
-      float x2 = cos(ang) * (radius - radiusVar) + center.x;
-      float y2 = sin(ang) * (radius - radiusVar) + center.y;
-      //ellipse(x, y, 5, 5);
-      //stroke(0, 100);
-      //line(x, y, x2, y2);
-      beginShape();
-      vertex(x, y);
-      vertex(x+6, y);
-      vertex(x2+6, y2);
-      vertex(x2, y2);
-      endShape(CLOSE);
-    }
+    ang1 = angEnd;
+    ang2 = angStart;
+  }
+
+  //stroke(0);
+  for(float ang = ang1; ang < ang2; ang += angStep){
+    float alpha = map(ang, angStart, angEnd, 255, 0);
+    
+    float x1 = cos(ang - angStep) * (radius + radiusVar) + center.x;
+    float y1 = sin(ang - angStep) * (radius + radiusVar) + center.y;
+    float x2 = cos(ang) * (radius + radiusVar) + center.x;
+    float y2 = sin(ang) * (radius + radiusVar) + center.y;
+    float x3 = cos(ang) * (radius - radiusVar) + center.x;
+    float y3 = sin(ang) * (radius - radiusVar) + center.y;
+    float x4 = cos(ang - angStep) * (radius - radiusVar) + center.x;
+    float y4 = sin(ang - angStep) * (radius - radiusVar) + center.y;
+
+    //ellipse(x, y, 5, 5);
+    //stroke(0, 100);
+    //line(x, y, x2, y2);
+    beginShape();
+    fill(240, alpha);
+    vertex(x1, y1);
+    fill(240, constrain(alpha - 60, 0, 255));
+    vertex(x2, y2);
+    fill(240, constrain(alpha - 100, 0, 255));
+    vertex(x3, y3);
+    fill(240, constrain(alpha - 80, 0, 255));
+    vertex(x4, y4);
+    endShape(CLOSE);
   }
 
   //stroke(255, 0, 0, 120);
