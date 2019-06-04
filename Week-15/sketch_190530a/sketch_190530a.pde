@@ -1,14 +1,17 @@
 float padding;
+//float b = random(1) > 0.5 ? 20 : 100;
+float b = 15;
 
 void setup(){
-  //size(580, 920);
-  size(580, 820, P2D);
-  padding = width/6;
+  size(580, 920, P2D);
+  //size(580, 820, P2D);
+  padding = width/5.5;
   noLoop();
+  colorMode(HSB, 360, 100, 100, 100);
 }
 
 void draw(){ 
-  background(100);
+  background(260, 35, 35);
   noStroke();
   
   PVector lastPoint = new PVector(width - padding, padding);
@@ -17,6 +20,9 @@ void draw(){
     PVector newTriangle = drawTriangle(lastPoint);
     lastPoint = newTriangle;
   }
+  
+  String fileName = "saved/" + year() + "-" + month() + "-" + day() + "-" + hour() + "-" + minute() + "-" + second() + ".png";
+  saveFrame(fileName);
 }
 
 PVector drawTriangle(PVector startPoint) {
@@ -37,7 +43,7 @@ PVector drawTriangle(PVector startPoint) {
   float radius = dist(center.x, center.y, startPoint.x, startPoint.y);
   
   noStroke();
-  fill(0, 50);
+  //fill(0, 50);
   //ellipse(startPoint.x, startPoint.y, 10, 10);
   //ellipse(endPoint.x, endPoint.y, 10, 10);
   //ellipse(center.x, center.y, 4, 4);
@@ -75,16 +81,28 @@ PVector drawTriangle(PVector startPoint) {
     //ellipse(x, y, 5, 5);
     //stroke(0, 100);
     //line(x, y, x2, y2);
+    float hue = 225;
+    float saturation = 35;
     beginShape();
-    fill(240, alpha);
+    fill(hue, saturation, b, alpha);
     vertex(x1, y1);
-    fill(240, constrain(alpha - 60, 0, 255));
+    fill(hue, saturation, b, constrain(alpha - 60, 0, 255));
     vertex(x2, y2);
-    fill(240, constrain(alpha - 100, 0, 255));
+    fill(hue, saturation, b, constrain(alpha - 100, 0, 255));
     vertex(x3, y3);
-    fill(240, constrain(alpha - 80, 0, 255));
+    fill(hue, saturation, b, constrain(alpha - 80, 0, 255));
     vertex(x4, y4);
     endShape(CLOSE);
+    
+    float h = random(300, 360);
+    float randomAlpha = random(-10, 10);
+    fill(h, 30, 80, alpha);
+    for(int i = 0; i < 10; i++){
+      float x = random(-radiusVar/2, radiusVar/2) + x1 + (x2 - x1)/2;
+      float y = random(-radiusVar*1.3, radiusVar*1.3) + y4 - (y4 - y1)/2;
+      float size = random(padding/100, padding/10);
+      ellipse(x, y, size, size);
+    }
   }
 
   //stroke(255, 0, 0, 120);
