@@ -5,7 +5,7 @@ float b = 15;
 void setup(){
   size(580, 920, P2D);
   //size(580, 820, P2D);
-  padding = width/5.5;
+  padding = width/5;
   noLoop();
   colorMode(HSB, 360, 100, 100, 100);
 }
