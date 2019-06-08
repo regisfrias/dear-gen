@@ -1,9 +1,10 @@
 PImage img;
 
 void settings(){
-  img = loadImage("IMG_20160617_224625.jpg");
-  //img = loadImage("IMG_20160817_133714.jpg");
-  size(img.width, img.height);
+  //img = loadImage("IMG_20160617_224625.jpg");
+  img = loadImage("IMG_20160903_231508.jpg");
+  //img = loadImage("IMG_20170107_212747.jpg");
+  size(img.width, img.height, P3D);
 }
 
 void setup(){
@@ -24,13 +25,13 @@ void draw(){
     pixelWave(y, 3, incrY);
   }
   
-  //String fileName = "saved/" + year() + "-" + month() + "-" + day() + "-" + hour() + "-" + minute() + "-" + second() + "-pixels.png";
-  //saveFrame(fileName);
+  String fileName = "saved/" + year() + "-" + month() + "-" + day() + "-" + hour() + "-" + minute() + "-" + second() + "-pixels.png";
+  saveFrame(fileName);
 }
 
 void pixelWave(float maxHeight, float offsetY, float incrY){
-  float incr = 0.002;
-  float power = 40;
+  float incr = 0.005;
+  float power = 60;
   for(float i = 0; i <= 1 + incr; i += incr){
     if(i > 0){
       float x = pow(i, power) * width;
@@ -41,16 +42,19 @@ void pixelWave(float maxHeight, float offsetY, float incrY){
       float prevAngY = map(prevX, 0, width, PI, TWO_PI);
       float prevY = cos(prevAngY) * maxHeight/2 + maxHeight/2 + offsetY;
       
-      if(prevX < width && prevY < height){
+      if(x < width && y < height){
         color c = img.pixels[int(prevY)*img.width+int(prevX)];
+        color c2 = img.pixels[int(y)*img.width+int(x)];
 
-        fill(c);
-        stroke(c);
+        noStroke();
         
         beginShape();
+        fill(c);
         vertex(prevX, prevY - incrY);
+        //fill(c2);
         vertex(x, y - incrY);
         vertex(x, y);
+        //fill(c);
         vertex(prevX, prevY);
         endShape();
       }
