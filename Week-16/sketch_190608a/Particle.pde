@@ -1,16 +1,28 @@
 class Particle {
-  float centerX, centerY, x, y, size;
+  float x, y, size;
+  float randAngle;
+  float partX;
+  float partY;
+  float radius;
   
-  Particle(float _centerX, float _centerY, float _x, float _y, float _size){
+  Particle(float _x, float _y, float _angle, float _radius){
     x = _x;
     y = _y;
-    size = _size;
-    centerX = _centerX;
-    centerY = _centerY;
+    radius= _radius;
+    
+    randAngle = random(-QUARTER_PI, QUARTER_PI);
+    partX = cos(_angle + randAngle) * radius + x;
+    partY = sin(_angle + randAngle) * radius + y;
   }
   
   void draw(){
-    line(x, y, centerX, centerY);
-    ellipse(x, y, size/2, size/2);
+    line(x, y, partX, partY);
+    //bezier(
+    ellipse(partX, partY, radius/2, radius/2);
+  }
+  
+  PVector values(){
+    PVector values = new PVector(partX, partY, radius/2);
+    return values;
   }
 }

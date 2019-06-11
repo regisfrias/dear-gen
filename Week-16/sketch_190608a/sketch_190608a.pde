@@ -2,6 +2,7 @@ ArrayList<Cell> cells = new ArrayList<Cell>();
 
 void setup(){
   size(920, 580);
+  colorMode(HSB, 360, 100, 100, 100);
 }
 
 void draw(){
@@ -37,6 +38,10 @@ void createParticle(){
   
   for (int i = 0; i < cells.size(); i++) {
     Cell c = cells.get(i);
+    c.grow();
+    if(!c.isAlive){
+      cells.remove(i);
+    }
     if(i > 0){
       Cell prevPart = cells.get(i-1);
       prevPart.update(c.x, c.y);

@@ -1,4 +1,6 @@
-class Cell { 
+class Cell {
+  float age;
+  public boolean isAlive;
   float x, y;
   float nextX = -1;
   float nextY = -1;
@@ -12,11 +14,20 @@ class Cell {
     x = _x;
     y = _y;
     isNewLine = _isNewLine;
+    isAlive = true;
   }
   
   void reset(){
     nextX = 0;
     nextY = 0;
+  }
+  
+  void grow(){
+    if(age <= 100){
+      age += 0.25;
+    } else {
+      isAlive = false;
+    }
   }
   
   void update(float _nextX, float _nextY){
@@ -28,20 +39,18 @@ class Cell {
   
   void draw() { 
     //ellipse(x, y, radius, radius);
-    ellipse(x, y, 1, 1);
+    //ellipse(x, y, 1, 1);
     if(!isNewLine && nextX >= 0 && nextY >= 0){
       if(radius <= radiusLimit){
         radius += 10;
-      
-        float randAngle = random(-HALF_PI, HALF_PI);
-        float partX = cos(angle + randAngle) * radius*3 + x;
-        float partY = sin(angle + randAngle) * radius*3 + y;
-        particles.add(new Particle(x, y, partX, partY, radius*3));
+        particles.add(new Particle(x, y, angle, radius*3));
       }
       
       float x1 = cos(angle) * radiusLimit + x;
       float y1 = sin(angle) * radiusLimit + y;
       //stroke(255, 0, 0, 100);
+      stroke(0, 0, 0, 100 - age);
+      fill(0, 0, 100, 100 - age);
       line(x, y, x1, y1);
       
       //stroke(0);
@@ -51,7 +60,11 @@ class Cell {
 
       for (int i = 0; i < particles.size(); i++) {
         Particle p = particles.get(i);
-        p.draw();
+        //p.draw();
+        PVector values = p.values();
+        line(x, y, values.x, values.y);
+        //bezier(
+        ellipse(values.x, values.y, values.z, values.z);
       }
     }
   } 
