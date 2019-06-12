@@ -10,6 +10,10 @@ class Cell {
   float angle;
   ArrayList<Particle> particles = new ArrayList<Particle>();
   
+  float h = random(230, 270);
+  float s = random(5, 30);
+  float b = random(80, 97);
+  
   Cell (float _x, float _y, boolean _isNewLine) {
     x = _x;
     y = _y;
@@ -41,30 +45,34 @@ class Cell {
     //ellipse(x, y, radius, radius);
     //ellipse(x, y, 1, 1);
     if(!isNewLine && nextX >= 0 && nextY >= 0){
+      stroke(h, s, b, 100 - age);
+      
       if(radius <= radiusLimit){
         radius += 10;
         particles.add(new Particle(x, y, angle, radius*3));
       }
       
-      float x1 = cos(angle) * radiusLimit + x;
-      float y1 = sin(angle) * radiusLimit + y;
-      //stroke(255, 0, 0, 100);
-      stroke(0, 0, 0, 100 - age);
-      fill(0, 0, 100, 100 - age);
-      line(x, y, x1, y1);
-      
       //stroke(0);
-      //line(x, y, nextX, nextY);
+      line(x, y, nextX, nextY);
       //ellipse(x, y, 8, 8);
-      
 
       for (int i = 0; i < particles.size(); i++) {
         Particle p = particles.get(i);
         //p.draw();
-        PVector values = p.values();
-        line(x, y, values.x, values.y);
-        //bezier(
-        ellipse(values.x, values.y, values.z, values.z);
+        PVector[] points = p.points();
+        bezier(
+          x, y,
+          x, y,
+          points[1].x, points[1].y,
+          points[0].x, points[0].y
+        );
+        //line(x, y, pValues.x, pValues.y);
+        pushStyle();
+        noStroke();
+        fill(h, s, b, 100 - age);
+        ellipse(points[0].x, points[0].y, points[0].z, points[0].z);
+        //ellipse(points[0].x, points[0].y, 5, 5);
+        popStyle();
       }
     }
   } 

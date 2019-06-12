@@ -3,10 +3,11 @@ ArrayList<Cell> cells = new ArrayList<Cell>();
 void setup(){
   size(920, 580);
   colorMode(HSB, 360, 100, 100, 100);
+  noFill();
 }
 
 void draw(){
-  background(255);
+  background(255, 30, 40);
   for (int i = 0; i < cells.size(); i++) {
     Cell c = cells.get(i);
     c.draw();
