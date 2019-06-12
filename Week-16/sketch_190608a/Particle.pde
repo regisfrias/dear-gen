@@ -1,5 +1,5 @@
 class Particle {
-  float x, y, size;
+  float x, y, size, angle;
   float randAngle;
   float partX, partY, anchorX, anchorY;
   float radius;
@@ -8,12 +8,13 @@ class Particle {
     x = _x;
     y = _y;
     radius= _radius;
+    angle = _angle;
     
     randAngle = random(-QUARTER_PI, QUARTER_PI);
-    partX = cos(_angle + randAngle) * radius + x;
-    partY = sin(_angle + randAngle) * radius + y;
-    anchorX = cos(_angle) * radius/3 + x;
-    anchorY = sin(_angle) * radius/3 + y;
+    partX = cos(angle + randAngle) * radius + x;
+    partY = sin(angle + randAngle) * radius + y;
+    anchorX = cos(angle) * radius/3 + x;
+    anchorY = sin(angle) * radius/3 + y;
   }
   
   PVector[] points(){

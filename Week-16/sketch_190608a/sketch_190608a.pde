@@ -32,6 +32,11 @@ void keyPressed(){
       cells.remove(i);
     }
   }
+  
+  if(key == 's'){
+    String fileName = "saved/" + year() + "-" + month() + "-" + day() + "-" + hour() + "-" + minute() + "-" + second() + ".png";
+    saveFrame(fileName);
+  }
 }
 
 void createParticle(){

@@ -58,7 +58,7 @@ class Cell {
 
       for (int i = 0; i < particles.size(); i++) {
         Particle p = particles.get(i);
-        //p.draw();
+        
         PVector[] points = p.points();
         bezier(
           x, y,
@@ -66,12 +66,10 @@ class Cell {
           points[1].x, points[1].y,
           points[0].x, points[0].y
         );
-        //line(x, y, pValues.x, pValues.y);
         pushStyle();
         noStroke();
         fill(h, s, b, 100 - age);
         ellipse(points[0].x, points[0].y, points[0].z, points[0].z);
-        //ellipse(points[0].x, points[0].y, 5, 5);
         popStyle();
       }
     }
